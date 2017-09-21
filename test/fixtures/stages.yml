@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  title: MyString
+  group: MyString
+  theater: MyString
+  startdate: 2017-09-21
+  enddate: 2017-09-21
+
+two:
+  url: MyString
+  title: MyString
+  group: MyString
+  theater: MyString
+  startdate: 2017-09-21
+  enddate: 2017-09-21
