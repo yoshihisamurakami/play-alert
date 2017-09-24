@@ -1,0 +1,12 @@
+
+<h1 class="page-title">観劇アラート</h1>
+
+<br>
+<ul class="stage-list">
+<% @stages.each do |stage| %>
+  <li class="title"><%= stage.title %></li>
+  <li class="group"><%= stage.group %></li>
+  <!-- <li class="startdate"><%= stage.startdate %></li> -->
+<% end %>
+  
+</ul>

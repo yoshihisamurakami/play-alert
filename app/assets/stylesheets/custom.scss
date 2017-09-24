@@ -1,0 +1,31 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding: 1em 5em;
+}
+
+.page-title {
+  font-size: 1.5em;
+  color: green;
+}
+
+.stage-list {
+  list-style: none;
+  padding: 0 0;
+  border-bottom: 1px solid #eee;
+}
+
+.title, .group {
+  font-size: 1.0em;
+  line-height: 1.6em;
+  color: #668;
+}
+.title {
+  float: left;
+  max-width: 29em;
+}
+.group {
+  margin-left: 30em;
+  display: block;
+}
