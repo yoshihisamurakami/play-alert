@@ -1,5 +1,5 @@
 class StagesController < ApplicationController
   def index
-    @stages = Stage.all
+    @stages = Stage.page(params[:page])
   end
 end

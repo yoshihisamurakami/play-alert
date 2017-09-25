@@ -1,12 +1,14 @@
 
 <h1 class="page-title">観劇アラート</h1>
 
-<br>
-<ul class="stage-list">
-<% @stages.each do |stage| %>
-  <li class="title"><%= stage.title %></li>
-  <li class="group"><%= stage.group %></li>
-  <!-- <li class="startdate"><%= stage.startdate %></li> -->
-<% end %>
-  
-</ul>
+<table class="table">
+  <% @stages.each do |stage| %>
+  <tr>
+    <td class="startdate"><%= stage.startdate %>(<%= dayoftheweek(stage.startdate) %>)</td>
+    <td><%= stage.title %> &nbsp; <%= stage.group %></td>
+    <td><%= stage.theater %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= paginate @stages %>
