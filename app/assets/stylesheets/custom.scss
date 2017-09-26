@@ -34,3 +34,14 @@ body {
   white-space: nowrap;
   width: 9em;
 }
+
+a:link {
+  color: #000;
+}
+a:visited {
+  color: #000;
+}
+a:hover {
+  text-decoration: none;
+  color: #668;
+}

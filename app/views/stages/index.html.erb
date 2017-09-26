@@ -1,12 +1,12 @@
 
 <h1 class="page-title">観劇アラート</h1>
 
-<table class="table">
+<table class="table table-hover">
   <% @stages.each do |stage| %>
   <tr>
-    <td class="startdate"><%= stage.startdate %>(<%= dayoftheweek(stage.startdate) %>)</td>
-    <td><%= stage.title %> &nbsp; <%= stage.group %></td>
-    <td><%= stage.theater %></td>
+      <td class="startdate"><%= stage.startdate %>(<%= dayoftheweek(stage.startdate) %>)</td>
+      <td><a href="<%= stage_path(stage.id) %>"><%= stage.title %> &nbsp; <%= stage.group %></a></td>
+      <td><%= stage.theater %></td>
   </tr>
   <% end %>
 </table>

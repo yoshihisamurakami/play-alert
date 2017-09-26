@@ -1,0 +1,26 @@
+
+<h1 class="page-title">観劇アラート</h1>
+
+<p>公演情報</p>
+
+<table class="table table-hover">
+  <tr>
+    <td>タイトル</td>
+    <td><%= @stage.title %></td>
+  </tr>
+  <tr>
+    <td>団体</td>
+    <td><%= @stage.group %></td>
+  </tr>
+  <tr>
+    <td>劇場</td>
+    <td><%= @stage.theater %></td>
+  </tr>
+  <tr>
+    <td>公演期間</td>
+    <td>
+      <%= @stage.startdate %>(<%= dayoftheweek(@stage.startdate) %>) ～ 
+      <%= @stage.enddate %>(<%= dayoftheweek(@stage.enddate) %>)
+    </td>
+  </tr>
+</table>
