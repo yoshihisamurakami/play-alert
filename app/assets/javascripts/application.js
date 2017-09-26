@@ -13,3 +13,14 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+//= require jquery
+
+
+$(document).ready(function(){
+  $(".stage-choice").click( function() {
+	  var url = $(this).attr('data-choice');
+	  window.location.href = url
+  });
+});
+
+
