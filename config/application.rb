@@ -19,5 +19,7 @@ module PlayAlert
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     
+    # production環境でもAutoload on
+    config.enable_dependency_loading = true
   end
 end
