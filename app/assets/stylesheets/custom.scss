@@ -12,9 +12,8 @@ body {
 
 .startdate {
   white-space: nowrap;
-  width: 9em;
+  width: 8em;
 }
-
 
 .stage-choice {
   cursor : pointer;
@@ -27,5 +26,8 @@ body {
   }
   .sp-none {
     display: none;
+  }
+  .startdate {
+    width: 5.5em;
   }
 }

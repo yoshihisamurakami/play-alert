@@ -4,7 +4,9 @@
 <table class="table table-hover">
   <% @stages.each do |stage| %>
   <tr class="stage-choice" data-choice="<%= stage_path(stage.id) %>">
-    <td class="startdate"><%= stage.startdate %>(<%= dayoftheweek(stage.startdate) %>)</td>
+    <td class="startdate">
+      <span class="sp-none"><%= stage.startdate.to_s[0, 5] %></span><%= stage.startdate.to_s[5, 20] %>
+      (<%= dayoftheweek(stage.startdate) %>)</p></td>
     <td><%= stage.title %>&nbsp; <br><%= stage.group %></td>
     <td class="sp-none"><%= stage.theater %></td>
   </tr>
