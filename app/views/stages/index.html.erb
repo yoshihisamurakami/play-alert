@@ -5,8 +5,8 @@
   <% @stages.each do |stage| %>
   <tr class="stage-choice" data-choice="<%= stage_path(stage.id) %>">
     <td class="startdate"><%= stage.startdate %>(<%= dayoftheweek(stage.startdate) %>)</td>
-    <td><%= stage.title %> &nbsp; <%= stage.group %></td>
-    <td><%= stage.theater %></td>
+    <td><%= stage.title %>&nbsp; <br><%= stage.group %></td>
+    <td class="sp-none"><%= stage.theater %></td>
   </tr>
   <% end %>
 </table>
