@@ -21,5 +21,7 @@ module PlayAlert
     
     # production環境でもAutoload on
     config.enable_dependency_loading = true
+    
+    config.i18n.default_locale = :ja
   end
 end
