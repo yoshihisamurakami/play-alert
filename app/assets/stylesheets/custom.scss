@@ -34,13 +34,28 @@ body {
   padding: 1em 0em;
 }
 .alert-step {
-  background:#66f; 
+  background:#88f; 
   padding: 8px;
   margin: 8px;
-  /*border:1px solid #ff0000;*/ 
   border-radius:5px;
   color: white;
 }
+.alert-indent {
+  padding-left: 5.3em;
+}
+input[type="text"]{
+  font-size: 1.3em;
+  padding: 6px;
+}
+input[type="text"]:focus {
+  outline: 1px #44f solid;
+}
+.alert-text {
+  font-size: 1.3em;
+  padding-left: 2px;
+  padding-right: 1em;
+}
+
 @media screen and (max-width: 767px) {
   body {
     padding: 1em 0.5em;

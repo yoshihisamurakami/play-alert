@@ -31,9 +31,17 @@
 <section>
   <div class="alert-on-notlogin">
     <h3 class="alert-title-notlogin">ログインしないで通知をもらう</h3>
-    <p><span class="alert-step">STEP1</span>メールアドレスを入力してください。</p>
+    <p><span class="alert-step">STEP1</span>通知メール用のメールアドレスを入力してください。</p>
+    <p class="alert-indent"><%= text_field :user, :email, size: 50 %></p>
     <p><br></p>
     <p><span class="alert-step">STEP2</span>通知メールを送る日にちを指定してください。</p>
-    <p><br></p>
+    <p class="alert-indent">
+      <%= check_box 'alert', 'seven_days_ago', {}, true, false %>
+      <span class="alert-text">初日の7日前</span>
+      <%= check_box 'alert', 'three_days_ago', {}, true, false %>
+      <span class="alert-text">初日の3日前</span>
+      <%= check_box 'alert', 'one_days_ago', {}, true, false %>
+      <span class="alert-text">初日の1日前</span>
+    </p>
   </div>
 </section>
