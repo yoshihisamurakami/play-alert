@@ -16,15 +16,13 @@ body {
   white-space: nowrap;
   width: 8em;
 }
-
 .stage-choice {
   cursor : pointer;
   font-size: 1.2em;
 }
-.table-hover > tbody > tr:hover {
+.stage-list > tbody > tr:hover {
   background-color: #ceddff;
 }
-
 .alert-on-notlogin{
   padding-top: 1em;
 }

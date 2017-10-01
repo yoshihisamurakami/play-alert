@@ -3,7 +3,7 @@
 
 <p>公演情報</p>
 
-<table class="table table-hover">
+<table class="table">
   <tr>
     <td>タイトル</td>
     <td><%= @stage.title %></td>
@@ -22,6 +22,12 @@
       <%= @stage.startdate %>(<%= dayoftheweek(@stage.startdate) %>) ～ 
       <%= @stage.enddate %>(<%= dayoftheweek(@stage.enddate) %>)
     </td>
+  </tr>
+  <tr>
+    <td>詳細情報</td>
+    <td><%= link_to 'Corich公演情報', 'http://stage.corich.jp' + @stage.url,
+                    target: '_blank',
+                    rel: 'noreferrer' %></td>
   </tr>
 </table>
 

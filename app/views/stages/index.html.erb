@@ -1,7 +1,7 @@
 
 <h1 class="page-title">観劇アラート</h1>
 
-<table class="table table-hover">
+<table class="table table-hover stage-list">
   <% @stages.each do |stage| %>
   <tr class="stage-choice" data-choice="<%= stage_path(stage.id) %>">
     <td class="startdate">
