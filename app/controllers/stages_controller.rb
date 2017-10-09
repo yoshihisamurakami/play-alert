@@ -5,6 +5,8 @@ class StagesController < ApplicationController
   
   def show
     @stage = Stage.find(params[:id])
+    @user  = User.new
+    #@user.stage = @stage 
     #StageMailer.confirm.deliver_now # メール送信
   end
 end
