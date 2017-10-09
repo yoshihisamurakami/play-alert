@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001122411) do
+ActiveRecord::Schema.define(version: 20171009112231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alerts", force: :cascade do |t|
+    t.bigint "stage_id"
+    t.bigint "user_id"
+    t.boolean "seven_days", default: false, null: false
+    t.boolean "three_days", default: false, null: false
+    t.boolean "one_day", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stage_id"], name: "index_alerts_on_stage_id"
+    t.index ["user_id"], name: "index_alerts_on_user_id"
+  end
 
   create_table "stages", force: :cascade do |t|
     t.string "url"
@@ -33,4 +45,6 @@ ActiveRecord::Schema.define(version: 20171001122411) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "alerts", "stages"
+  add_foreign_key "alerts", "users"
 end

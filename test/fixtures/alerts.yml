@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stage: one
+  user: one
+  seven_days: false
+  three_days: false
+  one_day: false
+
+two:
+  stage: two
+  user: two
+  seven_days: false
+  three_days: false
+  one_day: false
