@@ -7,8 +7,8 @@ class AlertTest < ActiveSupport::TestCase
     @alert = Alert.new(
       stage: @stage, 
       user: @user,
-      seven_days: false,
-      three_days: false,
+      seven_days: true,
+      three_days: true,
       one_day: true,
     )
   end
@@ -24,6 +24,13 @@ class AlertTest < ActiveSupport::TestCase
   
   test "userがなければエラー" do
     @alert.user_id = nil
+    assert_not @alert.valid?
+  end
+  
+  test "seven three one 全部falseだったらエラー" do
+    @alert.seven_days = false
+    @alert.three_days = false
+    @alert.one_day = false
     assert_not @alert.valid?
   end
 end
