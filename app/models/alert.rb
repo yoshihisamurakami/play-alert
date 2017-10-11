@@ -6,6 +6,8 @@ class Alert < ApplicationRecord
   
   validate :is_valid_sending_days
   
+  attr_accessor :email
+   
   # 全部falseだったらダメ
   def is_valid_sending_days
     if !seven_days && !three_days && !one_day
