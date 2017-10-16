@@ -5,10 +5,14 @@ class AlertsController < ApplicationController
     if !@stage
       redirect_to root_url
     end
-#    @user = User.find_by(email: user_params[:email])
-#    if !@user
-#      redirect_to root_url
-#    end
+    
+    @user = User.find_by(email: alert_params[:email])
+    if !@user
+      @user = User.new(email:alert_params[:email])
+      if !@user.save
+        redirect_to @stage, flash: { error: @user.errors.full_messages }
+      end
+    end
     
     #@stage_id = alert_params[:stage_id]
     #@user = User.find_by(:email, param[:email])
@@ -17,10 +21,7 @@ class AlertsController < ApplicationController
   private
   
     def alert_params
-      params.require(:alert).permit(:stage_id)
+      params.require(:alert).permit(:stage_id, :email)
     end
-    
-    def user_params
-      params.require(:user).permit(:email)
-    end
+
 end

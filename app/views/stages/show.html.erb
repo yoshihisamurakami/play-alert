@@ -37,14 +37,12 @@
 <section>
   <div class="alert-on-notlogin">
     <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
+    <%= render 'shared/error_messages' %>
+
     <h3 class="alert-title-notlogin">ログインしないで通知をもらう</h3>
     <p><span class="alert-step">STEP1</span>通知メール用のメールアドレスを入力してください。</p>
     <p class="alert-indent">
-      <%= #form_for([@alert, @user], url: {controller: 'alerts', action: 'create'}) do |ff| 
-      %>
-        <%= f.text_field :email, {size: 50} %>
-      <% #end
-      %>
+      <%= f.text_field :email, {size: 50} %>
     </p>
     <p><br></p>
     

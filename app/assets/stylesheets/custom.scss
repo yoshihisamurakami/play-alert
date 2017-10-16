@@ -54,6 +54,24 @@ input[type="text"]:focus {
   padding-right: 1em;
 }
 
+/**
+ * エラーメッセージ
+ */
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
 @media screen and (max-width: 767px) {
   body {
     padding: 1em 0.5em;

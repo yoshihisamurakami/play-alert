@@ -1,0 +1,12 @@
+<% if flash[:error].present? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      入力にエラーがあります。
+    </div>
+    <ul>
+    <% flash[:error].each do |e| %>
+      <li><%= e %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
