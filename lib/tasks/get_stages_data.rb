@@ -7,10 +7,9 @@ class Tasks::GetStagesData
 
   class << self
     def execute
-      #exec_on_development
+      delete_past_stages
 
       for page in 1..30 do
-      #for page in 1..1 do
         puts stages_url(page)
         stages = StagesHtmlParser.parse( stages_url(page) )
         puts "count => " + stages.count.to_s
@@ -23,7 +22,13 @@ class Tasks::GetStagesData
       #troup = StageHtmlParser.parse( STAGE_TEST_URL )
       #puts troup
     end
-
+    
+    # 公演最終日が前日より前の舞台情報は削除
+    def delete_past_stages
+      yesterday = Date.today - 1
+      Stage.where("enddate <= ?", yesterday).destroy_all
+    end
+    
     def exec_on_development
       stages = StagesHtmlParser.parse( LOCAL_STAGES_FILE )
       stages.each do |stage|
