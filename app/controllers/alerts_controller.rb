@@ -10,18 +10,30 @@ class AlertsController < ApplicationController
     if !@user
       @user = User.new(email:alert_params[:email])
       if !@user.save
-        redirect_to @stage, flash: { error: @user.errors.full_messages }
+        return redirect_to @stage, flash: { error: @user.errors.full_messages }
       end
     end
+
+    @alert = Alert.new(
+      stage_id: @stage.id,
+      user_id: @user.id,
+      seven_days: alert_params[:seven_days],
+      three_days: alert_params[:three_days],
+      one_day: alert_params[:one_day],
+      )
+    if !@alert.save
+      return redirect_to @stage, flash: { error: @alert.errors.full_messages }
+    end
+    StageMailer.confirm.deliver_now
+    flash[:success] = "通知登録しました。通知確認用のメールをご確認ください。"
     
-    #@stage_id = alert_params[:stage_id]
-    #@user = User.find_by(:email, param[:email])
+    redirect_to root_url
   end
   
   private
   
     def alert_params
-      params.require(:alert).permit(:stage_id, :email)
+      params.require(:alert).permit(:stage_id, :email, :seven_days, :three_days, :one_day)
     end
 
 end

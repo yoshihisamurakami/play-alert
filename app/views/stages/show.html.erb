@@ -49,9 +49,9 @@
       <%= f.hidden_field :stage_id, value: @stage.id %>
     <p><span class="alert-step">STEP2</span>通知メールを送る日にちを指定してください。</p>
     <p class="alert-indent">
-      <%= f.check_box :seven_days, {}, true, false %>
+      <%= f.check_box :seven_days, {}, "true", "false" %>
       <span class="alert-text">初日の7日前</span>
-      <%= f.check_box :three_days, {}, true, false %>
+      <%= f.check_box :three_days, {}, 'true', 'false' %>
       <span class="alert-text">初日の3日前</span>
       <%= f.check_box :one_day, {checked: true}, true, false %>
       <span class="alert-text">初日の1日前</span>
