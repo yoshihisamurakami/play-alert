@@ -5,4 +5,5 @@ class Stage < ApplicationRecord
   validates :theater, presence: true, length: { maximum: 255 }
   validates :startdate, presence: true
   validates :enddate,   presence: true
+  has_many :alerts, dependent: :destroy
 end
