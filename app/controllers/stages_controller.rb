@@ -1,6 +1,6 @@
 class StagesController < ApplicationController
   def index
-    @stages = Stage.order(:startdate).page(params[:page])
+    @stages = Stage.order(:startdate, :id).page(params[:page])
   end
   
   def show

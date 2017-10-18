@@ -5,4 +5,12 @@ module StagesHelper
   def dayoftheweek(date)
     %w(日 月 火 水 木 金 土 日)[date.cwday]
   end
+  
+  # 2017-10-18 ->  2017年10月18日(水) 
+  def datejapan(date)
+    year  = date.to_s[0, 4]
+    month = date.to_s[5, 2]
+    day   = date.to_s[8, 2]
+    year + "年" + month + "月" + day + "日(" + dayoftheweek(date) + ")"
+  end
 end
