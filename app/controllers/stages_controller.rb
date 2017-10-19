@@ -1,6 +1,7 @@
 class StagesController < ApplicationController
   def index
-    @stages = Stage.order(:startdate, :id).page(params[:page])
+    today = Date.today
+    @stages = Stage.where("startdate > ?", today).order(:startdate, :id).page(params[:page])
   end
   
   def show

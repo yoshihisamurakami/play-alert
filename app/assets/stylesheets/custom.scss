@@ -2,14 +2,44 @@
 @import "bootstrap";
 
 body {
-  padding: 1em 5em;
+  padding: 4em 0em;
 }
 .container {
-  width: 80%;
+  width: 75%;
 }
 .page-title {
   font-size: 1.5em;
   color: green;
+}
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.5em;
+  color: green;
+  letter-spacing: 2px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+#logo:hover {
+  text-decoration: none;
+}
+
+.nav-link {
+  color: #666;
+  font-size: 1.8em;
+  padding: 6px 0px;
+  margin: 6px 6px;
+}
+.nav-link:hover {
+  text-decoration: none;
+}
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px #ccc solid;
+}
+.navbar-right {
+  float: right;
+  margin-right: 0px;
 }
 
 .startdate {
@@ -78,8 +108,7 @@ input[type="text"]:focus {
 
 @media screen and (max-width: 767px) {
   body {
-    padding: 1em 0.5em;
-    font-size: 200%;
+    padding: 4em 0.5em;
   }
   .container {
     width: 100%;
@@ -89,5 +118,8 @@ input[type="text"]:focus {
   }
   .startdate {
     width: 5.5em;
+  }
+  .navbar-nav {
+    margin: 0 0;
   }
 }
