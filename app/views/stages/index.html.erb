@@ -1,4 +1,6 @@
 
+<%= render 'counter' %>
+
 <% keydate = '' %>
 <% @stages.each do |stage| %>
 <%   if keydate != stage.startdate %>
@@ -14,6 +16,12 @@
     </div>
 <% end %>
 
+<%= render 'counter' %>
+
 <div style="text-align: center">
 <%= paginate @stages %>
+</div>
+
+<div id="stage-info">
+  
 </div>
