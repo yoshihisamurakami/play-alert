@@ -48,7 +48,7 @@ class Tasks::GetStagesData
     def save(stage)
       @stage = Stage.new(stage_db(stage))
       if @stage.save
-        puts "保存成功 url => " + stage[:url]
+        #puts "保存成功 url => " + stage[:url]
       else
         puts "保存失敗 url => " + stage[:url]
       end
@@ -58,7 +58,7 @@ class Tasks::GetStagesData
       old = Stage.find_by(url: stage[:url])
       puts "update id => " + old.id.to_s
       if old.update_attributes( stage_db(stage) )
-        puts "更新成功 url => " + stage[:url]
+        #puts "更新成功 url => " + stage[:url]
       else
         puts "更新失敗 url => " + stage[:url]
       end
