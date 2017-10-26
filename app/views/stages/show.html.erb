@@ -1,53 +1,34 @@
 
-<p>公演情報</p>
-
-<table class="table">
-  <tr>
-    <td>タイトル</td>
-    <td><%= @stage.title %></td>
-  </tr>
-  <tr>
-    <td>団体</td>
-    <td><%= @stage.group %></td>
-  </tr>
-  <tr>
-    <td>劇場</td>
-    <td><%= @stage.theater %></td>
-  </tr>
-  <tr>
-    <td>公演期間</td>
-    <td>
-      <%= @stage.startdate %>(<%= dayoftheweek(@stage.startdate) %>) ～ 
-      <%= @stage.enddate %>(<%= dayoftheweek(@stage.enddate) %>)
-    </td>
-  </tr>
-  <tr>
-    <td>詳細情報</td>
-    <td><%= link_to 'Corich公演情報', 'http://stage.corich.jp' + @stage.url,
-                    target: '_blank',
-                    rel: 'noreferrer' %></td>
-  </tr>
-</table>
-<!--
-<button type="button" class="btn btn-danger">ログインしないで通知をもらう</button>
-<button type="button" class="btn btn-primary">ログインして通知をもらう</button>
--->
+<div style="color: #f80; ">この公演が始まる前に、通知メールをもらおう！</div>
+<br>
+<span style="font-size:2.0em;"><%= @stage.title %></span>&nbsp;&nbsp;<br>
+<span style="font-size:1.4em; color: #666;"><%= @stage.group %></span><br>
+<div style="font-size:1.0em; color: #999;">
+  <%= datejapan(@stage.startdate) %>～ <%= datejapan(@stage.enddate) %><br>
+  <%= @stage.theater %>
+</div>
+<div style="font-size:1.0em; color: #999;">
+  詳しい情報は<%= link_to 'こちら', 'http://stage.corich.jp' + @stage.url,
+                  target: '_blank',
+                  rel: 'noreferrer' %>
+</div>
+<br>
+<br>
 
 <section>
   <div class="alert-on-notlogin">
     <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
     <%= render 'shared/error_messages' %>
-
-    <!--<h3 class="alert-title-notlogin">ログインしないで通知をもらう</h3>-->
-    <p><span class="alert-step">STEP1</span>通知メール用のメールアドレスを入力してください。</p>
-    <p class="alert-indent">
-      <%= f.text_field :email, {size: 50} %>
-    </p>
-    <p><br></p>
-    
-      <%= f.hidden_field :stage_id, value: @stage.id %>
-    <p><span class="alert-step">STEP2</span>通知メールを送る日にちを指定してください。</p>
-    <p class="alert-indent">
+    <div style="width: 100%">
+      <p>通知メール用のメールアドレスを入力してください。</p>
+      <p style="position:relative">
+        <%= f.text_field :email, style: "width: 100%; max-width: 500px;" %>
+      </p>
+    </div>
+    <%= f.hidden_field :stage_id, value: @stage.id %>
+    <p><!-- <span class="alert-step">STEP2</span> -->通知メールを送る日にちを指定してください。</p>
+    <!-- <p class="alert-indent"> -->
+    <p>
       <%= f.check_box :seven_days, {}, "true", "false" %>
       <span class="alert-text">初日の7日前</span>
       <%= f.check_box :three_days, {}, 'true', 'false' %>
