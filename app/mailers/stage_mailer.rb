@@ -8,6 +8,6 @@ class StageMailer < ApplicationMailer
   def confirm(email)
     @greeting = "Hi"
 
-    mail to: email
+    mail to: email, subject: "PLAY ALERT 通知確認メールです"
   end
 end
