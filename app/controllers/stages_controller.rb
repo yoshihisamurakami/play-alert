@@ -2,6 +2,7 @@ class StagesController < ApplicationController
   def index
     today = Date.today
     @stages = Stage.where("startdate > ?", today).order(:startdate, :id).page(params[:page])
+    @nowtime = Time.now
   end
   
   def show

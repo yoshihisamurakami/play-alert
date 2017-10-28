@@ -5,9 +5,9 @@ class StageMailer < ApplicationMailer
   #
   #   en.stage_mailer.confirm.subject
   #
-  def confirm
+  def confirm(email)
     @greeting = "Hi"
 
-    mail to: "muranet+rails@gmail.com"
+    mail to: email
   end
 end
