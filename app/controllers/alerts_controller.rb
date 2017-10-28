@@ -24,7 +24,7 @@ class AlertsController < ApplicationController
     if !@alert.save
       return redirect_to @stage, flash: { error: @alert.errors.full_messages }
     end
-    StageMailer.confirm(alert_params[:email]).deliver_now
+    StageMailer.confirm(alert_params[:email], @alert).deliver_now
     flash[:success] = "通知登録しました。通知確認用のメールをご確認ください。"
     
     redirect_to root_url

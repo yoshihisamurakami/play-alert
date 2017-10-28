@@ -5,9 +5,11 @@ class StageMailer < ApplicationMailer
   #
   #   en.stage_mailer.confirm.subject
   #
-  def confirm(email)
-    @greeting = "Hi"
-
+  
+  add_template_helper(StagesHelper)
+  
+  def confirm(email, alert)
+    @alert = alert
     mail to: email, subject: "PLAY ALERT 通知確認メールです"
   end
 end

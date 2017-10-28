@@ -1,10 +1,16 @@
 PLAY ALERT通知確認メール
 
-あいさつ : <%= @greeting %>
-PLAY ALERT システムに登録されました。
-公演の
-　日
-　日
-　日
-前にメール通知いたします。
+以下の公演について、メール通知の設定を行いました。
+
+公演タイトル：
+<%= @alert.stage.title %>
+
+団体名：
+<%= @alert.stage.group %>
+
+劇場：
+<%= @alert.stage.theater %>
+
+公演日程：
+<%= datejapan(@alert.stage.startdate) %>～ <%= datejapan(@alert.stage.enddate) %>
 
