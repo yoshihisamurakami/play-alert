@@ -12,4 +12,8 @@ class StageMailer < ApplicationMailer
     @alert = alert
     mail to: email, subject: "PLAY ALERT 通知確認メールです"
   end
+  
+  def jobend
+    mail to: "muranet+playalert@gmail.com", subject: "JOB実行しました"
+  end
 end

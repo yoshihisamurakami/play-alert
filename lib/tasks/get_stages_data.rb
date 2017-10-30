@@ -1,8 +1,5 @@
 class Tasks::GetStagesData
   STAGES_URL = 'http://stage.corich.jp/stage/start'.freeze
-  #LOCAL_STAGES_FILE = '/home/ubuntu/workspace/play-alert/test/fixtures/files/stagelist.html'.freeze
-  #STAGES_URL = '/home/ubuntu/workspace/play-alert/test/fixtures/files/test_lastpage.html'.freeze
-
   STAGE_TEST_URL = '/home/ubuntu/workspace/play-alert/test/fixtures/files/stage.html'.freeze
 
   class << self
@@ -10,17 +7,15 @@ class Tasks::GetStagesData
       delete_past_stages
 
       for page in 1..30 do
-        puts stages_url(page)
         stages = StagesHtmlParser.parse( stages_url(page) )
-        puts "count => " + stages.count.to_s
         stages.each do |stage|
           save_or_update_stage(stage)
         end
         break if stages.count < 20
-        sleep 2
+        sleep 1
       end
-      #troup = StageHtmlParser.parse( STAGE_TEST_URL )
-      #puts troup
+      
+      StageMailer.jobend
     end
     
     # 公演最終日が前日より前の舞台情報は削除
@@ -37,7 +32,7 @@ class Tasks::GetStagesData
     end
     
     def save_or_update_stage(stage)
-      puts "url => " + stage[:url]
+      #puts "url => " + stage[:url]
       if Stage.find_by(url: stage[:url]).nil?
         save(stage)
       else
@@ -50,17 +45,17 @@ class Tasks::GetStagesData
       if @stage.save
         #puts "保存成功 url => " + stage[:url]
       else
-        puts "保存失敗 url => " + stage[:url]
+        #puts "保存失敗 url => " + stage[:url]
       end
     end
     
     def update(stage)
       old = Stage.find_by(url: stage[:url])
-      puts "update id => " + old.id.to_s
+      #puts "update id => " + old.id.to_s
       if old.update_attributes( stage_db(stage) )
         #puts "更新成功 url => " + stage[:url]
       else
-        puts "更新失敗 url => " + stage[:url]
+        #puts "更新失敗 url => " + stage[:url]
       end
     end
     
