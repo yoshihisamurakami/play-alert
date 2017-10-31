@@ -15,7 +15,7 @@ class Tasks::GetStagesData
         sleep 1
       end
       
-      StageMailer.jobend
+      StageMailer.jobend.deliver_now
     end
     
     # 公演最終日が前日より前の舞台情報は削除
