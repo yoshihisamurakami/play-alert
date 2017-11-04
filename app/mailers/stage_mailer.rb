@@ -18,6 +18,8 @@ class StageMailer < ApplicationMailer
   end
   
   def alert(alert)
+    @alert = alert
+    @days  = dayscount(alert)
     subject = "[PLAY ALERT] 公演開始日の%d日前になりました"%[dayscount(alert)]
     mail_to = alert.user.email
     mail to: mail_to, subject: subject
