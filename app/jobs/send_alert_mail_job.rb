@@ -2,16 +2,18 @@ class SendAlertMailJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    puts "AlertMail送信処理 start.."
+    #puts "AlertMail送信処理 start.."
+    logger.debug "AlertMail送信処理 start.."
     
     @alerts = Alert.all
     @alerts.each do |alert|
       puts record_info alert
       if need_send?(alert)
-        puts "メール送信!!!"
+        StageMailer.alert(alert).deliver_now
       end
     end
-    puts "AlertMail送信処理 end.."
+    logger.debug "AlertMail送信処理 end.."
+    StageMailer.jobend.deliver_now
   end
   
   def record_info(alert)
@@ -25,5 +27,11 @@ class SendAlertMailJob < ApplicationJob
     return true if alert.three_days and diff.to_i == 3
     return true if alert.seven_days and diff.to_i == 7 
     false
+  end
+  
+  def dayscount(alert)
+    today = Date.today
+    diff = alert.stage.startdate - today
+    return diff.to_i
   end
 end

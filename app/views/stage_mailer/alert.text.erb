@@ -1,0 +1,15 @@
+PLAY ALERTシステムからのお知らせです。
+
+以下の公演について、公演開始日の<%= @days %>日前になりました。
+
+公演タイトル：
+<%= @alert.stage.title %>
+
+団体名：
+<%= @alert.stage.group %>
+
+劇場：
+<%= @alert.stage.theater %>
+
+公演日程：
+<%= datejapan(@alert.stage.startdate) %>～ <%= datejapan(@alert.stage.enddate) %>
