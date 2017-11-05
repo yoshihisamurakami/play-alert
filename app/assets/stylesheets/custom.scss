@@ -62,6 +62,7 @@ body {
 }
 .stage-choice:hover {
   background-color: #ceddff;
+  transition-duration: 0.6s;
 }
 .stage-list > tbody > tr:hover {
   background-color: #ceddff;
@@ -97,32 +98,21 @@ input[type="text"]:focus {
   padding-right: 1em;
 }
 
-#help-info {
-  top: 60px;
-  right: 13%;
-  width: auto;
-  height: auto;
-  display: none;
-  position: fixed;
-  z-index: 2;
-  text-align: right;
-  background-color: #f8ffa0;
-  border: 1px solid #d8d8d8;
-  padding: 1em;
-  color: #666;
+.help-title {
+  font-size: 1.5em;
+  color: #026;
 }
-/*
-#modal-overlay{
-	z-index:1;
-	display:none;
-	position:fixed;
-	top:0;
-	left:0;
-	width:100%;
-	height:120%;
-	background-color:rgba(0,0,0,0.75);
+.help-title:nth-child(n + 2) {
+  margin-top: 1.2em;
 }
-*/
+.help-body {
+  line-height: 1.5em;
+  color: #555;
+  font-size: 1.1em;
+}
+ol {
+  padding-left: 1.2em;
+}
 /**
  * エラーメッセージ
  */

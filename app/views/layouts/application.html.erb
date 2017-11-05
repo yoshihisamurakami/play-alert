@@ -17,7 +17,7 @@
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <%= link_to "", root_path, class: "glyphicon glyphicon-home nav-link" %>
-            <%= link_to "", "javascript:void(0);", class: "glyphicon glyphicon-question-sign nav-link popup-help-info" %>
+            <%= link_to "", help_path, class: "glyphicon glyphicon-question-sign nav-link popup-help-info" %>
           </ul>
         </nav>
       </div>
@@ -27,10 +27,7 @@
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
-      <div id="help-info">
-        PLAY ALERT は、<br>観たい公演を選んでメールアドレスを登録すると、<br>
-        その公演が始まる前に通知メールでお知らせする<br>Webサービスです。<br>
-      </div>
+      
     <%= yield %>
     </div>
     
