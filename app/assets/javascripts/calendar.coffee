@@ -2,4 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-  $('#calendar').fullCalendar()
+  $('#calendar').fullCalendar(
+    events:window.datas,
+    lang: 'ja',
+    minTime: "00:00:00",
+    maxTime: "24:00:00",
+  )
