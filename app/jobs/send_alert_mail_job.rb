@@ -13,7 +13,7 @@ class SendAlertMailJob < ApplicationJob
       end
     end
     logger.debug "AlertMail送信処理 end.."
-    StageMailer.jobend.deliver_now
+    #StageMailer.jobend.deliver_now
   end
   
   def record_info(alert)
