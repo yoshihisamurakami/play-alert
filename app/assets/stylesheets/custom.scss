@@ -28,7 +28,7 @@ body {
   color: #666;
   font-size: 1.8em;
   padding: 6px 0px;
-  margin: 6px 6px;
+  margin: 6px 4px;
 }
 .nav-link:link {
   text-decoration: none;
@@ -41,6 +41,12 @@ body {
 }
 .nav-link:visited {
   text-decoration: none;
+}
+.icon-link {
+  color: #666;
+  font-size: 1.8em;
+  padding: 0 0;
+  margin: 0px 2px;
 }
 .navbar {
   background-color: #fff;
@@ -56,7 +62,7 @@ body {
   width: 8em;
 }
 .stage-choice {
-  cursor : pointer;
+  /*cursor : pointer;*/
   padding: 0.5em;
   border-bottom: 1px solid #ddd;
 }
@@ -113,6 +119,10 @@ input[type="text"]:focus {
 ol {
   padding-left: 1.2em;
 }
+
+.fc-time {
+  display: none;
+}
 /**
  * エラーメッセージ
  */
@@ -133,10 +143,12 @@ ol {
 
 @media screen and (max-width: 767px) {
   body {
-    padding: 4em 0.5em;
+    padding: 4em 0;
   }
   .container {
     width: 100%;
+    padding-left: 4px;
+    padding-right: 4px;
   }
   .sp-none {
     display: none;

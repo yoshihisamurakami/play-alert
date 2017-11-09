@@ -13,4 +13,10 @@ module StagesHelper
     day   = date.to_s[8, 2]
     year + "年" + month + "月" + day + "日(" + dayoftheweek(date) + ")"
   end
+  
+  def datejapan_short(date)
+    month = date.to_s[5, 2]
+    day   = date.to_s[8, 2]
+    month + "月" + day + "日(" + dayoftheweek(date) + ")"
+  end
 end
