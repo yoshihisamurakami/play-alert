@@ -3,6 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'turbolinks:load', -> 
-  $('.stage-choice').on 'click', ->
-    url = $(this).attr('data-choice')
-    window.location.href = url
+#  $('.stage-choice').on 'click', ->
+#    url = $(this).attr('data-choice')
+#    window.location.href = url

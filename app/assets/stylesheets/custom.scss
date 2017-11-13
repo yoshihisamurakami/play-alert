@@ -42,12 +42,23 @@ body {
 .nav-link:visited {
   text-decoration: none;
 }
-.icon-link {
+.icon-link, .icon-link-mail {
   color: #666;
-  font-size: 1.8em;
+  font-size: 1.4em;
   padding: 0 0;
   margin: 0px 2px;
 }
+.icon-link:hover {
+  text-decoration: none;
+  color: yellow;
+  transition-duration: 0.3s;
+}
+.icon-link-mail:hover {
+  text-decoration: none;
+  color: #EE0;
+  transition-duration: 0.3s;
+}
+
 .navbar {
   background-color: #fff;
   border-bottom: 1px #ccc solid;
@@ -62,13 +73,12 @@ body {
   width: 8em;
 }
 .stage-choice {
-  /*cursor : pointer;*/
   padding: 0.5em;
   border-bottom: 1px solid #ddd;
 }
 .stage-choice:hover {
-  background-color: #ceddff;
-  transition-duration: 0.6s;
+  /*background-color: #ceddff;
+  transition-duration: 0.6s;*/
 }
 .stage-list > tbody > tr:hover {
   background-color: #ceddff;
@@ -123,6 +133,18 @@ ol {
 .fc-time {
   display: none;
 }
+
+.stagelist-title {
+  font-size:1.4em;
+  background-color: lightgreen;
+  color: white;
+  padding: 0.2em;
+  margin: 0.5em 0em;
+}
+.stage-title {
+  font-size: 1.2em;
+}
+
 /**
  * エラーメッセージ
  */
@@ -147,8 +169,10 @@ ol {
   }
   .container {
     width: 100%;
+    /*
     padding-left: 4px;
     padding-right: 4px;
+    */
   }
   .sp-none {
     display: none;
