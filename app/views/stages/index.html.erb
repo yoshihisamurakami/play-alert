@@ -9,17 +9,17 @@
     </div>
     <%  keydate = stage.startdate %>
 <%   end %>
-    <div class="stage-choice" data-choice="<%= stage_path(stage.id) %>">
+    <div class="stage-choice" data-choice="<%= stage_path(stage.id) %>" stage-id="<%= stage.id %>">
       <span class="stage-title"><%= stage.title %></span>&nbsp;&nbsp;
-      <span style="font-size:1em; color: #444;"><%= stage.group %></span><br>
-      <div style="font-size:1em; color: #999;">
-        <%= datejapan_short(stage.startdate) %>～ <%= datejapan_short(stage.enddate) %>&nbsp;&nbsp;
+      <span class="stage-group"><%= stage.group %></span><br>
+      
+      <span class="stage-detail">
+        <%= datejapan_short(stage.startdate) %>～ <%= datejapan_short(stage.enddate) %><br>
         <%= stage.theater %>&nbsp;&nbsp;
-        <div style="text-align: right">
-          <span><%= link_to "", root_path, class: "glyphicon glyphicon-star-empty icon-link" %></span>
-          <span><%= link_to "", root_path, class: "glyphicon glyphicon-envelope icon-link-mail" %></span>
-        </div>
-      </div>
+      </span>
+      <%= link_to "", "javascript:void(0);", class: "glyphicon glyphicon-star-empty icon-link star" %>
+      <%= link_to "", root_path, class: "glyphicon glyphicon-envelope icon-link-mail" %>
+
     </div>
       
 <% end %>

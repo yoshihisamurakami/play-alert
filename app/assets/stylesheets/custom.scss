@@ -43,19 +43,31 @@ body {
   text-decoration: none;
 }
 .icon-link, .icon-link-mail {
-  color: #666;
+  color: #888;
   font-size: 1.4em;
   padding: 0 0;
-  margin: 0px 2px;
+  margin: 0 3px;
+}
+.icon-link:link {
+  text-decoration: none;
+  color: #888;
 }
 .icon-link:hover {
   text-decoration: none;
   color: yellow;
   transition-duration: 0.3s;
 }
+.icon-link:active {
+  text-decoration: none;
+  color: #888;
+}
+.icon-link:visited {
+  text-decoration: none;
+  color: #888;
+}
 .icon-link-mail:hover {
   text-decoration: none;
-  color: #EE0;
+  color: darkblue;
   transition-duration: 0.3s;
 }
 
@@ -77,8 +89,9 @@ body {
   border-bottom: 1px solid #ddd;
 }
 .stage-choice:hover {
-  /*background-color: #ceddff;
-  transition-duration: 0.6s;*/
+  background-color: #ceddff;
+  transition-duration: 0.6s;
+  cursor : pointer;
 }
 .stage-list > tbody > tr:hover {
   background-color: #ceddff;
@@ -144,7 +157,14 @@ ol {
 .stage-title {
   font-size: 1.2em;
 }
-
+.stage-group {
+  font-size:1em;
+  color: #444;
+}
+.stage-detail {
+  font-size:1em;
+  color: #999;
+}
 /**
  * エラーメッセージ
  */
