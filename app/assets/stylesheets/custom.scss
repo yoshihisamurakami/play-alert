@@ -172,6 +172,112 @@ ol {
 }
 
 /**
+ * popupまわり
+ */
+#popup {
+  display: none;
+  /*display: block;*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.close_overlay {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.3;
+  z-index: 5;
+}
+.popup-window {
+  display: block;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 90%;
+  height: 80%;
+  margin: 0 5%;
+  background-color: white;
+  border: #bbb 2px solid;
+  z-index: 1045;
+}
+.circle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  flex-flow: column; 
+  vertical-align: top;
+}
+
+/* 円の基本形 */
+.maru {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  flex-flow: column; 
+  /*vertical-align: top;*/
+  
+}
+/* 円の大きさ */
+.size_normal{
+  width: 30px;
+  height: 30px;
+}
+/* 文字の大きさ */
+.letter3 {
+  font-size: 2.5em;
+  line-height: 1.5em;
+}
+/* 円と文字の色 */
+.gray1 {
+  color: #ccc;
+  border: 3px solid #ccc;
+}
+
+
+
+
+.popup-close {
+  /*
+  text-align: right;
+  font-size: 2em;
+  margin-right: 14px;
+  */
+  font-size: 1.5em;
+  line-height: 1.5em;
+
+}
+.popup-alert {
+  color: #f80;
+  text-align: center;
+  width: 100%;
+  font-size: 1.2em;
+}
+.popup-stageinfo {
+  text-align:center;
+  width: 80%;
+  margin: 0 10%;
+  background-color: #f0f0f0;
+}
+
+#popup-title {
+  text-align: left;
+  font-size: 2em;
+}
+#popup-group {
+  text-align: left;
+  font-size: 1.4em;
+  color: #666;
+}
+/**
  * エラーメッセージ
  */
 #error_explanation {

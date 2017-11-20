@@ -16,8 +16,15 @@ $(document).on 'turbolinks:load', ->
       $(this).addClass('glyphicon-star-empty')
       $(this).css('color', '#888')
     return false
-  $('.icon-link-mail').on 'click', ->
-  #  $('#popup').css('display','block')
-    url = $(this).parent().attr('data-choice')
-    window.location.href = url
+  $('.icon-link-mail').on 'click', (e) ->
+    $('#popup').css('display','block')
+    $('#popup-title').html($(this).parent().attr('stage-title'))
+    $('#popup-group').html($(this).parent().attr('stage-group'))
+    #$('#popup').css('top', e.pageY)
+    #alert(e.pageY)
+    #url = $(this).parent().attr('data-choice')
+    #window.location.href = url
+    return false
+  $('.close_overlay').on 'click', ->
+    $('#popup').css('display','none')
     return false
