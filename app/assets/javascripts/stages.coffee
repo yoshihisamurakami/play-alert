@@ -20,11 +20,13 @@ $(document).on 'turbolinks:load', ->
     $('#popup').css('display','block')
     $('#popup-title').html($(this).parent().attr('stage-title'))
     $('#popup-group').html($(this).parent().attr('stage-group'))
-    #$('#popup').css('top', e.pageY)
-    #alert(e.pageY)
+    
     #url = $(this).parent().attr('data-choice')
     #window.location.href = url
     return false
   $('.close_overlay').on 'click', ->
+    $('#popup').css('display','none')
+    return false
+  $('.popup-close').on 'click', ->
     $('#popup').css('display','none')
     return false
