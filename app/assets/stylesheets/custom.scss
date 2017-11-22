@@ -182,10 +182,11 @@ ol {
   width: 100%;
   height: 100%;
   z-index: 1040;
+  padding: 0 0;
+  margin: 0 0;
 }
 
 .close_overlay {
-  display: block;
   position: fixed;
   top: 0;
   left: 0;
@@ -195,17 +196,23 @@ ol {
   opacity: 0.3;
   /*z-index: 5;*/
   z-index: 1045;
+  padding: 0 0;
+  margin: 0 0;
 }
 .popup-window {
-  display: block;
   position: fixed;
-  top: 60px;
+  /*position: absolute;*/
+  top: -5%;
   left: 0;
   width: 90%;
-  height: 80%;
-  margin: 0 5%;
+  height: 90%;
+  margin: 5% 5%;
+  box-sizing: border-box;
   background-color: white;
-  border: #bbb 2px solid;
+  border: green 1px solid;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   z-index: 1050;
 }
 
@@ -270,10 +277,6 @@ ol {
   }
   .container {
     width: 100%;
-    /*
-    padding-left: 4px;
-    padding-right: 4px;
-    */
   }
   .sp-none {
     display: none;
@@ -286,6 +289,9 @@ ol {
   }
   #help-info {
     right: 8px;
+  }
+  .popup-window {
+    top: 0;
   }
   .popup-alert {
     font-size: 0.8em;
