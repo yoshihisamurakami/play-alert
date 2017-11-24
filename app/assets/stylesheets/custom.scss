@@ -119,15 +119,8 @@ body {
 .alert-indent {
   padding-left: 5.3em;
 }
-input[type="text"]{
-  font-size: 1.3em;
-  padding: 6px;
-}
-input[type="text"]:focus {
-  outline: 1px #44f solid;
-}
+
 .alert-text {
-  font-size: 1.3em;
   padding-left: 2px;
   padding-right: 1em;
 }
@@ -194,14 +187,12 @@ ol {
   height: 100%;
   background-color: black;
   opacity: 0.3;
-  /*z-index: 5;*/
   z-index: 1045;
   padding: 0 0;
   margin: 0 0;
 }
 .popup-window {
   position: fixed;
-  /*position: absolute;*/
   top: -5%;
   left: 0;
   width: 90%;
@@ -210,9 +201,9 @@ ol {
   box-sizing: border-box;
   background-color: white;
   border: green 1px solid;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   z-index: 1050;
 }
 
@@ -231,27 +222,40 @@ ol {
   color: #f80;
   text-align: center;
   font-size: 1.2em;
+  margin-top: 1em;
 }
 .popup-stageinfo {
-  text-align:center;
+  text-align: left;
   width: 80%;
-  margin: 0 10%;
-  /*background-color: #f0f0f0;*/
+  margin: 6px 10%;
 }
 
 #popup-title {
-  text-align: left;
   font-size: 2em;
 }
 #popup-group {
-  text-align: left;
   font-size: 1.2em;
-  color: #666;
+}
+#popup-term {
+  font-size: 1.2em;
+  color: #444;
 }
 #popup-theater {
-  text-align: left;
   font-size: 1.2em;
-  color: #666;
+  color: #888;
+}
+.popup-email {
+  width: 100%;
+  max-width: 500px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.2em;
+  padding: 6px;
+}
+
+input[type="text"]:focus {
+  outline: 1px #eee solid;
+  border-bottom: 1px solid #ddd;
 }
 /**
  * エラーメッセージ
@@ -292,14 +296,28 @@ ol {
   }
   .popup-window {
     top: 0;
+    width: 98%;
+    height: 90%;
+    margin: 5% 1%;
   }
   .popup-alert {
-    font-size: 0.8em;
+    font-size: 1em;
+  }
+  .popup-stageinfo {
+    width: 100%;
+    margin: 6px 0;
+    padding: 0 6px;
   }
   #popup-title {
+    font-size: 1.2em;
+  }
+  #popup-term {
     font-size: 1em;
   }
   #popup-group {
-    font-size: 0.8em;
+    font-size: 1em;
+  }
+  #popup-theater {
+    font-size: 1em;
   }
 }
