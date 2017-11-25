@@ -122,7 +122,7 @@ body {
 
 .alert-text {
   padding-left: 2px;
-  padding-right: 1em;
+  padding-right: 4px;
 }
 
 .help-title {
@@ -195,15 +195,16 @@ ol {
   position: fixed;
   top: -5%;
   left: 0;
-  width: 90%;
+  right: 0;
+  width: 600px;
   height: 90%;
-  margin: 5% 5%;
+  margin: 5% auto;
   box-sizing: border-box;
   background-color: white;
-  border: green 1px solid;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+  border: #999 2px solid;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   z-index: 1050;
 }
 
@@ -220,9 +221,8 @@ ol {
 
 .popup-alert {
   color: #f80;
-  text-align: center;
-  font-size: 1.2em;
-  margin-top: 1em;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
 }
 .popup-stageinfo {
   text-align: left;
@@ -232,6 +232,7 @@ ol {
 
 #popup-title {
   font-size: 2em;
+  margin-top: 1em;
 }
 #popup-group {
   font-size: 1.2em;
@@ -255,8 +256,9 @@ ol {
 
 input[type="text"]:focus {
   outline: 1px #eee solid;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #ddd;
 }
+
 /**
  * エラーメッセージ
  */
@@ -296,20 +298,22 @@ input[type="text"]:focus {
   }
   .popup-window {
     top: 0;
-    width: 98%;
-    height: 90%;
-    margin: 5% 1%;
+    width: 96%;
+    height: 96%;
+    margin: 2% 2%;
+    padding: 0.2em 0.5em;
   }
   .popup-alert {
     font-size: 1em;
   }
   .popup-stageinfo {
     width: 100%;
-    margin: 6px 0;
+    margin: 2px 0;
     padding: 0 6px;
   }
   #popup-title {
     font-size: 1.2em;
+    margin-top: 2em;
   }
   #popup-term {
     font-size: 1em;
