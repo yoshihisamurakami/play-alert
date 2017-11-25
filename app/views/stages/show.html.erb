@@ -1,40 +1,39 @@
 
-<div style="color: #f80; ">この公演が始まる前に、通知メールをもらおう！</div>
-<br>
-<span style="font-size:2.0em;"><%= @stage.title %></span>&nbsp;&nbsp;<br>
-<span style="font-size:1.4em; color: #666;"><%= @stage.group %></span><br>
-<div style="font-size:1.0em; color: #999;">
-  <%= datejapan(@stage.startdate) %>～ <%= datejapan(@stage.enddate) %><br>
-  <%= @stage.theater %>
-</div>
+<div id="popup-title"><%= @stage.title %></div>
+<span id="popup-group"><%= @stage.group %></span><br>
+<div id="popup-term"><%= datejapan(@stage.startdate) %>～ <%= datejapan(@stage.enddate) %></div>
+<div id="popup-theater"><%= @stage.theater %></div>
+
+<!--
 <div style="font-size:1.0em; color: #999;">
   詳しい情報は<%= link_to 'こちら', 'http://stage.corich.jp' + @stage.url,
                   target: '_blank',
                   rel: 'noreferrer' %>
 </div>
-<br>
-<br>
+-->
+
+<div class="popup-alert">メールアドレスを登録すると、指定した日に通知メールが届きます！</div>
 
 <section>
   <div class="alert-on-notlogin">
     <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
     <%= render 'shared/error_messages' %>
     <div style="width: 100%">
-      <p>通知メール用のメールアドレスを入力してください。</p>
+      メールアドレス
       <p style="position:relative">
-        <%= f.text_field :email, style: "width: 100%; max-width: 500px;" %>
+        <%= f.text_field :email, class: "popup-email", placeholder: "email@example.com" %>
       </p>
     </div>
     <%= f.hidden_field :stage_id, value: @stage.id %>
-    <p><!-- <span class="alert-step">STEP2</span> -->通知メールを送る日にちを指定してください。</p>
+    <span>いつ通知メールを送りますか？</span>
     <!-- <p class="alert-indent"> -->
     <p>
       <%= f.check_box :seven_days, {}, "true", "false" %>
-      <span class="alert-text">初日の7日前</span>
+      <span class="alert-text">初日の7日前</span><br>
       <%= f.check_box :three_days, {}, 'true', 'false' %>
-      <span class="alert-text">初日の3日前</span>
+      <span class="alert-text">初日の3日前</span><br>
       <%= f.check_box :one_day, {checked: true}, 'true', 'false' %>
-      <span class="alert-text">初日の1日前</span>
+      <span class="alert-text">初日の1日前</span><br>
     </p>
     <%= f.submit "OK", class: "btn btn-primary" %>
     <% end %>
