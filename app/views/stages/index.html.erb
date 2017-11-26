@@ -35,6 +35,7 @@
 <div id="popup">
   <div class="close_overlay"></div>
   <div class="popup-window">
+    <br><br><br><br><br>
     <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
     <%= f.text_field :email, class: "popup-email", placeholder: "email@example.com" %>
     <% end %>
