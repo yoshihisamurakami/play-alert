@@ -254,25 +254,20 @@ ol {
   color: #888;
 }
 .popup-email {
-  position: absolute;
-  top: 100px;
-  left: 0;
-  /*
   width: 100%;
   max-width: 500px;
   border: none;
   border-bottom: 1px solid #ddd;
   font-size: 1.2em;
   padding: 6px;
-  */
 }
 
+/*
 input[type="text"]:focus {
-  /*
   outline: 1px #eee solid;
   border-bottom: 2px solid #ddd;
-  */
 }
+*/
 
 /**
  * エラーメッセージ

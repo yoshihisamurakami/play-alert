@@ -1,4 +1,6 @@
 
+<%= render 'shared/error_messages' %>
+
 <div id="popup-title"><%= @stage.title %></div>
 <span id="popup-group"><%= @stage.group %></span><br>
 <div id="popup-term"><%= datejapan(@stage.startdate) %>～ <%= datejapan(@stage.enddate) %></div>
@@ -17,7 +19,6 @@
 <section>
   <div class="alert-on-notlogin">
     <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
-    <%= render 'shared/error_messages' %>
     <div style="width: 100%">
       メールアドレス
       <p style="position:relative">
