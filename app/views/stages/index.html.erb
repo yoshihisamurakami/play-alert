@@ -4,6 +4,7 @@
 <% end %>
       
 <%= render 'counter' %>
+<%= @debug %>
 
 <% keydate = '' %>
 <% @stages.each do |stage| %>
@@ -23,7 +24,7 @@
         <%= datejapan_short(stage.startdate) %>～ <%= datejapan_short(stage.enddate) %><br>
         <%= stage.theater %>&nbsp;&nbsp;
       </span>
-      <%= link_to "", "", class: "glyphicon glyphicon-star-empty icon-link star" %>
+      <%= link_to "", "", class: "glyphicon icon-link star " + @star_class[stage.id] %>
       <%= link_to "", "", class: "glyphicon glyphicon-envelope icon-link-mail" %>
 
     </div>

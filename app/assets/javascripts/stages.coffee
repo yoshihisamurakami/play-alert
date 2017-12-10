@@ -3,31 +3,27 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'turbolinks:load', -> 
-  #$('.stage-choice').on 'click', ->
-  #  url = $(this).attr('data-choice')
-  #  window.location.href = url
   $('.star').on 'click', ->
     if $(this).hasClass('glyphicon-star-empty')
-      $(this).removeClass('glyphicon-star-empty')
-      $(this).addClass('glyphicon-star')
-      $(this).css('color', '#FFC700')
+      empty_to_star($(this))
     else
-      $(this).removeClass('glyphicon-star')
-      $(this).addClass('glyphicon-star-empty')
-      $(this).css('color', '#888')
+      star_to_empty($(this))
     return false
   $('.icon-link-mail').on 'click', (e) ->
-    #$('#popup').css('display','block')
-    #$('#popup-title').html($(this).parent().attr('stage-title'))
-    #$('#popup-group').html($(this).parent().attr('stage-group'))
-    #$('#popup-term').html($(this).parent().attr('stage-term'))
-    #$('#popup-theater').html($(this).parent().attr('stage-theater'))
     url = $(this).parent().attr('data-choice')
     window.location.href = url
     return false
-  $('.close_overlay').on 'click', ->
-    $('#popup').css('display','none')
-    return false
-  $('.popup-close').on 'click', ->
-    $('#popup').css('display','none')
-    return false
+
+empty_to_star = (obj)->
+  obj.removeClass('glyphicon-star-empty').addClass('glyphicon-star')
+  id = obj.parent().attr('stage-id')
+  $.get '/stars/set/' + id, (data) ->
+    if data.result != 'OK'
+      alert('ERROR')
+
+star_to_empty = (obj)->
+  obj.removeClass('glyphicon-star').addClass('glyphicon-star-empty')
+  id = obj.parent().attr('stage-id')
+  $.get '/stars/unset/' + id, (data) ->
+    if data.result != 'OK'
+      alert('ERROR')

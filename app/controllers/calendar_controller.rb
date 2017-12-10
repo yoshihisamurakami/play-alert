@@ -1,9 +1,21 @@
 class CalendarController < ApplicationController
   def index
-    @datas = [
-      'title' => "クリスマス",
-      'start' => "2017-11-24 00:00:00",
-      'end'   => "2017-11-25 23:00:00",
-    ]
+    @debug = ''
+    @datas = []
+    stages = Stage.where(id: stars)
+    stages.each do |stage|
+      @datas += [
+        'title' => stage.group + " " + stage.title,
+        'start' => stage.startdate.to_s + " 00:00:00",
+        'end' => stage.enddate.to_s + " 23:59:59",
+      ]
+    end
+  end
+  
+  def stars
+    stars = []
+    star_str = cookies.signed[:stars]
+    stars = star_str.split(',') if star_str
+    stars
   end
 end

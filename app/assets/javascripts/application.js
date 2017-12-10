@@ -19,4 +19,3 @@
 //= require fullcalendar
 //= require fullcalendar/lang/ja
 //= require_tree .
-

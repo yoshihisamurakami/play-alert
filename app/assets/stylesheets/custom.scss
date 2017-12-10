@@ -43,6 +43,13 @@ body {
   }
 }
 
+.glyphicon-star-empty {
+  color: #888;
+}
+.glyphicon-star {
+  color: #ffc700!important;
+}
+
 .icon-link, .icon-link-mail {
   color: #888;
   font-size: 1.4em;
@@ -201,12 +208,6 @@ ol {
   left: 0;
   right: 0;
   bottom: 0;
-  
-  /*
-  width: 500px;
-  height: 90%;
-  margin: 5% auto;
-  */
   box-sizing: border-box;
   background-color: white;
   border: #999 2px solid;
@@ -269,6 +270,9 @@ input[type="text"]:focus {
 }
 */
 
+div.fc-left h2 {
+  font-size: 1.5em;
+}
 /**
  * エラーメッセージ
  */
@@ -334,4 +338,5 @@ input[type="text"]:focus {
   #popup-theater {
     font-size: 1em;
   }
+
 }
