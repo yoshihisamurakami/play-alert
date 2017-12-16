@@ -1,7 +1,10 @@
 class StagesController < ApplicationController
   def index
     today = Date.today
-    @stages = Stage.where("startdate > ?", today).order(:startdate, :id).page(params[:page])
+    @stages = Stage
+      .where("startdate > ?", today)
+      .order(:startdate, :id)
+      .page(params[:page])
     @alert = Alert.new
     
     star_str = cookies.signed[:stars]
