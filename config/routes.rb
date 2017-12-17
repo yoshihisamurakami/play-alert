@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get 'calendar', to: 'calendar#index'
   get 'stars/set/:id', to: 'stars#set'
   get 'stars/unset/:id', to: 'stars#unset'
+  get 'signup', to: 'users#new'
+  
 end

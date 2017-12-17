@@ -2,8 +2,13 @@
 <% flash.each do |message_type, message| %>
   <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
-      
+
+<div class="signup">
+  <%= link_to "新規ユーザー登録", signup_path, class: "btn btn-info" %>
+</div>
+
 <%= render 'counter' %>
+
 <%= @debug %>
 
 <% keydate = '' %>
