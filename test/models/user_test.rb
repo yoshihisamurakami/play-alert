@@ -5,11 +5,21 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(
       email: "test@example.com", 
       regular: false,
+      name: 'murakami'
     )
   end
   
   test "should be valid" do
     assert @user.valid?
+  end
+  test "name が空だったらエラー" do
+    @user.name = '  '
+    assert_not @user.valid?
+  end
+  
+  test "name が　50文字より長ければエラー" do
+    @user.name = "a" * 51
+    assert_not @user.valid?
   end
   
   test "email がなければエラー" do
@@ -38,6 +48,20 @@ class UserTest < ActiveSupport::TestCase
       @user.email = invalid_address
       assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
     end
+  end
+
+  test "email ユニークであること" do
+    duplicate_user = @user.dup
+    duplicate_user.email = @user.email.upcase  # 大文字・小文字を区別しない判定用
+    @user.save
+    assert_not duplicate_user.valid?
+  end
+
+  test "email アドレスが小文字で保存されること" do
+    mixed_case_email = "Foo@ExAMPle.CoM"
+    @user.email = mixed_case_email
+    @user.save
+    assert_equal mixed_case_email.downcase, @user.reload.email
   end
   
 end
