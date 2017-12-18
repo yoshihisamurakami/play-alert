@@ -263,12 +263,6 @@ ol {
   padding: 6px;
 }
 
-/*
-input[type="text"]:focus {
-  outline: 1px #eee solid;
-  border-bottom: 2px solid #ddd;
-}
-*/
 
 div.fc-left h2 {
   font-size: 1.5em;
@@ -291,14 +285,46 @@ div.fc-left h2 {
   }
 }
 
-
 .signup {
   text-align: right;
   margin-bottom: 4px;
 }
+
+.signup-title {
+  text-align: center;
+  font-size: 1.5em;
+  color: #888;
+}
+
 .counter {
   text-align: right;
 }
+
+/* forms */
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+  margin-bottom: 15px !important;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+label {
+  color: #666;
+}
+
 
 @media screen and (max-width: 767px) {
   body {

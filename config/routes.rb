@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   get 'stars/set/:id', to: 'stars#set'
   get 'stars/unset/:id', to: 'stars#unset'
   get 'signup', to: 'users#new'
-  
+  post 'signup',  to: 'users#create'
+  resources :users
 end
