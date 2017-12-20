@@ -20,12 +20,16 @@
             <%= link_to "", root_path, class: "glyphicon glyphicon-home nav-link" %>
             <%= link_to "", calendar_path, class: "glyphicon  glyphicon-calendar nav-link" %>
             <%= link_to "", help_path, class: "glyphicon glyphicon-question-sign nav-link" %>
+            <!-- <%= link_to "", login_path, class: "glyphicon glyphicon-user nav-link" %> -->
           </ul>
         </nav>
       </div>
     </header>
 
     <div class="container">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
     <%= yield %>
     </div>
     
