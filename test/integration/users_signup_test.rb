@@ -27,6 +27,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'stages/index'
+    assert is_logged_in?
   end
   
 end
