@@ -11,11 +11,5 @@ class CalendarController < ApplicationController
       ]
     end
   end
-  
-  def stars
-    stars = []
-    star_str = cookies.signed[:stars]
-    stars = star_str.split(',') if star_str
-    stars
-  end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217035250) do
+ActiveRecord::Schema.define(version: 20171226050541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 20171217035250) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_stars", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "stage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stage_id"], name: "index_user_stars_on_stage_id"
+    t.index ["user_id", "stage_id"], name: "index_user_stars_on_user_id_and_stage_id", unique: true
+    t.index ["user_id"], name: "index_user_stars_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.boolean "regular"
@@ -50,4 +60,6 @@ ActiveRecord::Schema.define(version: 20171217035250) do
 
   add_foreign_key "alerts", "stages"
   add_foreign_key "alerts", "users"
+  add_foreign_key "user_stars", "stages"
+  add_foreign_key "user_stars", "users"
 end

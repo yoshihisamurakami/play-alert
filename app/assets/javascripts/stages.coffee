@@ -9,15 +9,16 @@ $(document).on 'turbolinks:load', ->
     else
       star_to_empty($(this))
     return false
-  $('.icon-link-mail').on 'click', (e) ->
-    url = $(this).parent().attr('data-choice')
-    window.location.href = url
-    return false
+#  $('.icon-link-mail').on 'click', (e) ->
+#    url = $(this).parent().attr('data-choice')
+#    window.location.href = url
+#    return false
 
 empty_to_star = (obj)->
   obj.removeClass('glyphicon-star-empty').addClass('glyphicon-star')
   id = obj.parent().attr('stage-id')
   $.get '/stars/set/' + id, (data) ->
+    console.log(data)
     if data.result != 'OK'
       alert('ERROR')
 

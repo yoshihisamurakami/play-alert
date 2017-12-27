@@ -15,3 +15,11 @@ two:
   theater: MyString
   startdate: 2017-09-21
   enddate: 2017-09-21
+
+hamlet:
+  url: /stages/12345
+  title: ハムレット
+  group: うんたら劇団
+  theater: なんたら劇場
+  startdate: 2050-01-01
+  enddate: 2050-12-31

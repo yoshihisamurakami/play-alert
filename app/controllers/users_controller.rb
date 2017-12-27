@@ -14,7 +14,6 @@ class UsersController < ApplicationController
       # ERROR
       render 'new'
     else
-      #StageMailer.confirm.deliver_now
       log_in @user
       flash[:success] = "ユーザー登録に成功しました！"
       redirect_to root_url

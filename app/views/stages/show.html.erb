@@ -1,6 +1,4 @@
 
-<%= render 'shared/error_messages' %>
-
 <div id="popup-title"><%= @stage.title %></div>
 <span id="popup-group"><%= @stage.group %></span><br>
 <div id="popup-term"><%= datejapan(@stage.startdate) %>～ <%= datejapan(@stage.enddate) %></div>
@@ -14,20 +12,13 @@
 </div>
 -->
 
-<div class="popup-alert">メールアドレスを登録すると、指定した日に通知メールが届きます！</div>
-
 <section>
   <div class="alert-on-notlogin">
     <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
-    <div style="width: 100%">
-      メールアドレス
-      <p style="position:relative">
-        <%= f.text_field :email, class: "popup-email", placeholder: "email@example.com" %>
-      </p>
-    </div>
+    
     <%= f.hidden_field :stage_id, value: @stage.id %>
-    <span>いつ通知メールを送りますか？</span>
-    <!-- <p class="alert-indent"> -->
+    <span class="popup-alert">公演が始まる前に通知でお知らせを受けたい場合は、以下をチェックして「メールで通知する」ボタンを押してください！</span>
+    <br><br>
     <p>
       <%= f.check_box :seven_days, {}, "true", "false" %>
       <span class="alert-text">初日の7日前</span><br>
@@ -36,7 +27,7 @@
       <%= f.check_box :one_day, {checked: true}, 'true', 'false' %>
       <span class="alert-text">初日の1日前</span><br>
     </p>
-    <%= f.submit "OK", class: "btn btn-primary" %>
+    <%= f.submit "メールで通知する", class: "btn btn-primary" %>
     <% end %>
   </div>
 </section>

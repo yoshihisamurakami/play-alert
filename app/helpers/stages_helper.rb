@@ -1,4 +1,3 @@
-require 'date'
 
 module StagesHelper
 
@@ -18,5 +17,9 @@ module StagesHelper
     month = date.to_s[5, 2]
     day   = date.to_s[8, 2]
     month + "月" + day + "日(" + dayoftheweek(date) + ")"
+  end
+  
+  def glyphicon_star(stage_id)
+    stars.include?(stage_id.to_s) ? "glyphicon-star" : "glyphicon-star-empty"
   end
 end

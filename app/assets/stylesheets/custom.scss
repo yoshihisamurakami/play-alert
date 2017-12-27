@@ -325,6 +325,13 @@ label {
   color: #666;
 }
 
+input[type=checkbox] {
+  display: inline;
+  width: 20px;
+}
+
+
+
 
 @media screen and (max-width: 767px) {
   body {
