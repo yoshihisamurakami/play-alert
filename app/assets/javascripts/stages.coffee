@@ -13,12 +13,16 @@ $(document).on 'turbolinks:load', ->
 #    url = $(this).parent().attr('data-choice')
 #    window.location.href = url
 #    return false
-
+  $('#usermenu_dropdown').on 'click', ->
+    if $('#user_menu').css('display') == 'none'
+      $('#user_menu').css('display', 'block')
+    else
+      $('#user_menu').css('display', 'none')
+    
 empty_to_star = (obj)->
   obj.removeClass('glyphicon-star-empty').addClass('glyphicon-star')
   id = obj.parent().attr('stage-id')
   $.get '/stars/set/' + id, (data) ->
-    console.log(data)
     if data.result != 'OK'
       alert('ERROR')
 

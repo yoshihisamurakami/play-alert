@@ -1,8 +1,10 @@
 
 <div class="signup">
   <% if logged_in? %>
+  <!--
     <%= current_user.name %> でログイン中..
     <%= link_to "ログアウト", logout_path, method: :delete %>
+  -->
   <% else %>
     <%= link_to "新規ユーザー登録", signup_path, class: "btn btn-info" %>
     <%= link_to "ログイン", login_path, class: "btn btn-info" %>

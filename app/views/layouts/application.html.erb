@@ -12,20 +12,32 @@
 
   <body>
     <header class="navbar navbar-fixed-top">
-    <!--<header class="navbar navbar-top">-->
       <div class="container">
         <%= link_to "PLAY ALERT", root_path, id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <%= link_to "", root_path, class: "glyphicon glyphicon-home nav-link" %>
             <%= link_to "", calendar_path, class: "glyphicon  glyphicon-calendar nav-link" %>
-            <%= link_to "", help_path, class: "glyphicon glyphicon-question-sign nav-link" %>
-            <!-- <%= link_to "", login_path, class: "glyphicon glyphicon-user nav-link" %> -->
+            <!-- <%= link_to "", help_path, class: "glyphicon glyphicon-question-sign nav-link" %> -->
+            
+            <% if logged_in? %>
+              <span class="glyphicon glyphicon-user nav-link" id="usermenu_dropdown"></span>
+            <% else %>
+              <%= link_to "", login_path, class: "glyphicon glyphicon-user nav-link" %>
+            <% end %>
           </ul>
         </nav>
       </div>
-    </header>
+      
+    <div id="user_menu">
+      <% if logged_in? %>
+        <span class="usermenu_hello"><%= current_user.name %> さん、こんにちは！</span>
+        <%= link_to "ログアウト", logout_path, method: :delete %>
+      <% end %>
+    </div>
 
+    </header>
+    
     <div class="container">
       <% flash.each do |message_type, message| %>
         <% if message_type == 'sucess' %>
@@ -36,6 +48,6 @@
 
     <%= yield %>
     </div>
-    
+
   </body>
 </html>

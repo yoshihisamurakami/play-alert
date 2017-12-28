@@ -330,8 +330,25 @@ input[type=checkbox] {
   width: 20px;
 }
 
+#usermenu_dropdown:hover {
+  cursor : pointer;
+}
 
-
+#user_menu {
+  display: none;
+  position: fixed;
+  top: 50px;
+  right: 14%;
+  bottom: 0;
+  width: 100;
+  height: 50px;
+  /*padding: 0 0;
+  margin: 0 0;*/
+  border: 1px solid #999;
+  background: white;
+  box-shadow: 1px 1px;
+  text-align: right;
+}
 
 @media screen and (max-width: 767px) {
   body {
