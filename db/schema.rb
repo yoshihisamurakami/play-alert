@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171226050541) do
+ActiveRecord::Schema.define(version: 20171230111910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(version: 20171226050541) do
     t.datetime "updated_at", null: false
     t.index ["stage_id"], name: "index_alerts_on_stage_id"
     t.index ["user_id"], name: "index_alerts_on_user_id"
+  end
+
+  create_table "stage_details", force: :cascade do |t|
+    t.bigint "stage_id"
+    t.text "cast"
+    t.text "playwright"
+    t.text "director"
+    t.text "price"
+    t.text "site"
+    t.text "timetable"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stage_id"], name: "index_stage_details_on_stage_id"
   end
 
   create_table "stages", force: :cascade do |t|
@@ -60,6 +73,7 @@ ActiveRecord::Schema.define(version: 20171226050541) do
 
   add_foreign_key "alerts", "stages"
   add_foreign_key "alerts", "users"
+  add_foreign_key "stage_details", "stages"
   add_foreign_key "user_stars", "stages"
   add_foreign_key "user_stars", "users"
 end

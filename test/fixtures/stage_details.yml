@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stage: one
+  cast: MyText
+  playwright: MyText
+  director: MyText
+  price: MyText
+  site: MyText
+  timetable: MyText
+
+two:
+  stage: two
+  cast: MyText
+  playwright: MyText
+  director: MyText
+  price: MyText
+  site: MyText
+  timetable: MyText
