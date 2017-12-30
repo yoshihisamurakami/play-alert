@@ -9,16 +9,16 @@ $(document).on 'turbolinks:load', ->
     else
       star_to_empty($(this))
     return false
-#  $('.icon-link-mail').on 'click', (e) ->
-#    url = $(this).parent().attr('data-choice')
-#    window.location.href = url
-#    return false
   $('#usermenu_dropdown').on 'click', ->
     if $('#user_menu').css('display') == 'none'
       $('#user_menu').css('display', 'block')
     else
       $('#user_menu').css('display', 'none')
-    
+  $(document).on 'click', ->
+    if (!$(event.target).closest('#usermenu_dropdown').length) and (!$(event.target).closest('#user_menu').length)
+      if $('#user_menu').css('display') == 'block'
+        $('#user_menu').css('display', 'none')
+      
 empty_to_star = (obj)->
   obj.removeClass('glyphicon-star-empty').addClass('glyphicon-star')
   id = obj.parent().attr('stage-id')

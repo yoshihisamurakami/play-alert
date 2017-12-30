@@ -1,13 +1,7 @@
 
 <div class="signup">
-  <% if logged_in? %>
-  <!--
-    <%= current_user.name %> でログイン中..
-    <%= link_to "ログアウト", logout_path, method: :delete %>
-  -->
-  <% else %>
+  <% if !logged_in? %>
     <%= link_to "新規ユーザー登録", signup_path, class: "btn btn-info" %>
-    <%= link_to "ログイン", login_path, class: "btn btn-info" %>
   <% end %>
 </div>
 
@@ -34,9 +28,7 @@
         <%= stage.theater %>&nbsp;&nbsp;
       </span>
       <%= link_to "", "", class: "glyphicon icon-link star " + glyphicon_star(stage.id) %>
-      <% if logged_in? %>
-        <%= link_to "", stage, class: "glyphicon glyphicon-envelope icon-link-mail" %>
-      <% end %>
+      <%= link_to "", stage, class: "glyphicon glyphicon-envelope icon-link-mail" %>
     </div>
       
 <% end %>

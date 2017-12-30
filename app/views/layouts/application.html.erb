@@ -19,32 +19,22 @@
             <%= link_to "", root_path, class: "glyphicon glyphicon-home nav-link" %>
             <%= link_to "", calendar_path, class: "glyphicon  glyphicon-calendar nav-link" %>
             <!-- <%= link_to "", help_path, class: "glyphicon glyphicon-question-sign nav-link" %> -->
-            <span class="glyphicon glyphicon-user nav-link" id="usermenu_dropdown"></span>
-            <!--
-            <% if logged_in? %>
-              <span class="glyphicon glyphicon-user nav-link" id="usermenu_dropdown"></span>
-            <% else %>
-            <% end %>
-            -->
+            <div class="glyphicon glyphicon-user nav-link" id="usermenu_dropdown" style="display: inline;"></div>
           </ul>
         </nav>
       </div>
       
-    <div id="user_menu">
-      <% if logged_in? %>
+      <div id="user_menu">
         <ul class="user_dropdown">
-          <li><%= current_user.name %>さん、こんにちは！</li>
-          <li class="user_dropdown_list"><%= link_to "ユーザー設定", '#' %></li>
-          <li class="user_dropdown_list"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+          <% if logged_in? %>
+            <li><%= current_user.name %>さん、こんにちは！</li>
+            <li class="user_dropdown_list"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+          <% else %>
+            <li class="user_dropdown_list"><%= link_to "ログイン", login_path %></li>
+            <li class="user_dropdown_list"><%= link_to "新規ユーザー登録", signup_path %></li>
+          <% end %>
         </ul>
-      <% else %>
-        <ul class="user_dropdown">
-          <li class="user_dropdown_list"><%= link_to "ログイン", login_path %></li>
-          <li class="user_dropdown_list"><%= link_to "新規ユーザー登録", signup_path %></li>
-        </ul>
-      <% end %>
-    </div>
-
+      </div>
     </header>
     
     <div class="container">

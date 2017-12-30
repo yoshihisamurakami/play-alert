@@ -12,6 +12,7 @@
 </div>
 -->
 
+<% if logged_in? %>
 <section>
   <div class="alert-on-notlogin">
     <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
@@ -31,4 +32,7 @@
     <% end %>
   </div>
 </section>
-
+<% else %>
+  <br>
+  <span class="popup-alert">公演が始まる前に通知でお知らせを受けたい場合は、ログインしてください！</span>
+<% end %>
