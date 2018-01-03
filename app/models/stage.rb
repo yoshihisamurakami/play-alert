@@ -6,4 +6,5 @@ class Stage < ApplicationRecord
   validates :startdate, presence: true
   validates :enddate,   presence: true
   has_many :alerts, dependent: :destroy
+  has_one :stage_detail, dependent: :destroy
 end
