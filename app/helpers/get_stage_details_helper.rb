@@ -16,32 +16,20 @@ module GetStageDetailsHelper
     puts "get_stage_details helper start!!"
     
     stages = Stage.all
+    count=0
     stages.each do |stage| 
       puts stage.title + " " + stage.url
       next unless need_update?(stage.id)
-      
       puts "details update!"
-      html = get_html(CORICH_URL_DOMAIN + stage.url)
       
+      html = get_html(CORICH_URL_DOMAIN + stage.url)
       detail = get_detailinfo(html[:html], html[:charset])
       p detail
       save_detail(stage.id, detail)
-      break
+      sleep 2
     end
-    
+    puts "更新件数 => " + count.to_s
     return
-    
-    #url = "http://stage.corich.jp/stage/88329"
-    #html = get_html(url)
-    #puts html[:html]
-    
-    tmp_file = File.open("/tmp/t.html", "r")
-    tmp_html = tmp_file.read
-    tmp_file.close
-
-    details = get_detailinfo(tmp_html, 'utf-8')
-    p details
-    
   end
 
   def get_html(url)
@@ -87,7 +75,8 @@ module GetStageDetailsHelper
   def need_update?(stage_id)
     detail = StageDetail.find_by(stage_id: stage_id)
     return true if detail.nil?
-    # (3日以内にレコードが更新されていたらtrueを返す  あとで実装)
+    # (3日以内にレコードが更新されていたらfalseを返す)
+    return false if detail.updated_at > 3.days.ago
     true
   end
   
@@ -95,15 +84,9 @@ module GetStageDetailsHelper
     old_detail = StageDetail.find_by(stage_id: stage_id)
     @stage = Stage.find(stage_id)
     if old_detail.nil?
-      puts "title => " + @stage.title
-      @detail = @stage.build_stage_detail(detail)
-      return @detail.save
-    else
-      detail[:cast] = "TEST CAST"
-      puts "save_detail : update!"
       @detail = @stage.build_stage_detail(detail)
       return @detail.save
     end
-    true
+    old_detail.update_attributes(detail)
   end
 end
