@@ -23,9 +23,12 @@ module GetStageDetailsHelper
       puts "details update!"
       
       html = get_html(CORICH_URL_DOMAIN + stage.url)
+      next if !html
+      
       detail = get_detailinfo(html[:html], html[:charset])
-      p detail
+      
       save_detail(stage.id, detail)
+      count += 1
       sleep 2
     end
     puts "更新件数 => " + count.to_s
@@ -34,9 +37,13 @@ module GetStageDetailsHelper
 
   def get_html(url)
     charset = nil
-    html = open( url ) do |f|
-      charset = (f.class == 'Tempfile') ? f.charset : DEFAULT_CHARSET
-      f.read
+    begin
+      html = open( url ) do |f|
+        charset = (f.class == 'Tempfile') ? f.charset : DEFAULT_CHARSET
+        f.read
+      end
+    rescue
+      return false
     end
     {html: html, charset: charset} 
   end
