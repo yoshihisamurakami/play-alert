@@ -99,11 +99,9 @@ body {
   border-bottom: 1px solid #ddd;
 }
 .stage-choice:hover {
-  /*
   background-color: #ceddff;
   transition-duration: 0.6s;
   cursor : pointer;
-  */
 }
 .stage-list > tbody > tr:hover {
   background-color: #ceddff;
@@ -374,6 +372,19 @@ input[type=checkbox] {
     text-decoration: none;
   }
 }
+
+.detail-title {
+  background-color: #aaf;
+  color: #fff;
+  margin-top: 1em;
+  padding: 2px 0.5em;
+}
+.detail-content {
+  color: #222;
+  line-height: 150%;
+  padding-left: 0.5em;
+  margin-top: 0.5em;
+}
 @media screen and (max-width: 767px) {
   body {
     padding: 4em 0;
@@ -409,7 +420,7 @@ input[type=checkbox] {
     padding: 0 6px;
   }
   #popup-title {
-    font-size: 1.2em;
+    font-size: 1.6em;
     margin-top: 0.5em;
   }
   #popup-term {

@@ -22,4 +22,10 @@ module StagesHelper
   def glyphicon_star(stage_id)
     stars.include?(stage_id.to_s) ? "glyphicon-star" : "glyphicon-star-empty"
   end
+  
+  def is_visible?(str)
+    return false if str.nil?
+    return false if str.strip.empty?
+    true
+  end
 end

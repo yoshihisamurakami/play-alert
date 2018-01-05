@@ -19,6 +19,7 @@ class StagesController < ApplicationController
   
   def show
     @stage = Stage.find(params[:id])
+    @stage_detail = StageDetail.find_by(stage_id: @stage.id)
     @alert = Alert.new
   end
   

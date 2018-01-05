@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'turbolinks:load', -> 
+  $('.stage-choice').on 'click', ->
+    window.location.href = $(this).attr('data-choice')
+    return false
   $('.star').on 'click', ->
     if $(this).hasClass('glyphicon-star-empty')
       empty_to_star($(this))

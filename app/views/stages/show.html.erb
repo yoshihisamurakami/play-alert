@@ -12,6 +12,41 @@
 </div>
 -->
 
+<% if is_visible?(@stage_detail.playwright) %>
+<div class="detail-title">脚本</div>
+<div class="detail-content"><%= @stage_detail.playwright %></div>
+<% end %>
+
+<% if is_visible?(@stage_detail.director) %>
+<div class="detail-title">演出</div>
+<div class="detail-content"><%= @stage_detail.director %></div>
+<% end %>
+
+<% if is_visible?(@stage_detail.cast) %>
+<div class="detail-title">出演</div>
+<div class="detail-content"><%= @stage_detail.cast %></div>
+<% end %>
+
+<% if is_visible?(@stage_detail.price) %>
+<div class="detail-title">チケット</div> 
+<div class="detail-content"><%= @stage_detail.price.html_safe %></div>
+<% end %>
+
+<% if is_visible?(@stage_detail.timetable) %>
+<div class="detail-title">タイムテーブル</div>
+<div class="detail-content"><%= @stage_detail.timetable.html_safe %></div>
+<% end %>
+
+<% if is_visible?(@stage_detail.site) %>
+<div class="detail-title">公式サイト</div>
+<div class="detail-content">
+  <%= link_to @stage_detail.site, @stage_detail.site, target: '_blank' %>
+  <br>
+  <span style="color: blue;">最新の情報は公式サイトにてご確認ください。</span>  
+</div>
+<% end %>
+
+
 <% if logged_in? %>
 <section>
   <div class="alert-on-notlogin">
