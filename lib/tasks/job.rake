@@ -9,4 +9,7 @@ namespace :job do
     GetStageDetailsJob.perform_now
   end
   
+  task keepalive: :environment do
+    KeepaliveJob.perform_now
+  end
 end
