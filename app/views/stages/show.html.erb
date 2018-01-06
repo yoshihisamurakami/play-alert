@@ -12,6 +12,8 @@
 </div>
 -->
 
+<% unless @stage_detail.nil? %>
+
 <% if is_visible?(@stage_detail.playwright) %>
 <div class="detail-title">脚本</div>
 <div class="detail-content"><%= @stage_detail.playwright %></div>
@@ -46,6 +48,7 @@
 </div>
 <% end %>
 
+<% end %>
 
 <% if logged_in? %>
 <section>
