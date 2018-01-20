@@ -99,7 +99,8 @@ body {
   border-bottom: 1px solid #ddd;
 }
 .stage-choice:hover {
-  background-color: #ceddff;
+  /*background-color: #ceddff;*/
+  background-color: #e8eeee;
   transition-duration: 0.6s;
   cursor : pointer;
 }
@@ -151,11 +152,14 @@ ol {
 }
 
 .stagelist-title {
-  font-size:1.4em;
-  background-color: lightgreen;
+  font-size:1.2em;
+  background-color: #90bc54;
   color: white;
-  padding: 0.2em;
+  padding: 0.3em;
   margin: 0.5em 0em;
+}
+.nowplaying {
+  background-color: #d783a6;
 }
 .stage-title {
   font-size: 1.2em;

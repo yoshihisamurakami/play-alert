@@ -8,4 +8,12 @@ class Stage < ApplicationRecord
   has_many :alerts, dependent: :destroy
   has_many :user_stars, dependent: :destroy
   has_one :stage_detail, dependent: :destroy
+
+  include StagesHelper
+
+  def term
+    return datejapan_short(startdate) if startdate == enddate
+    datejapan_short(startdate) + "〜 " + datejapan_short(enddate) 
+  end
+
 end

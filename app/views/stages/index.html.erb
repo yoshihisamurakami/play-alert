@@ -9,31 +9,20 @@
 
 <%= @debug %>
 
+<%= link_to "上演中", stages_playing_path %> | 
+<%= link_to "今週〜", stages_thisweek_path %> | 
+<%= link_to "来週以降〜", stages_later_path %>
+
+<div id="stagelist_area">
 <% keydate = '' %>
 <% @stages.each do |stage| %>
 <%   if keydate != stage.startdate %>
-    <div class="stagelist-title">
-      <%= datejapan(stage.startdate) %>
-    </div>
-    <%  keydate = stage.startdate %>
+    <div class="stagelist-title<%= " nowplaying" if stage.startdate <= Date.today %>"><%= datejapan(stage.startdate) %></div>
+    <% keydate = stage.startdate %>
 <%   end %>
-    
-    <div class="stage-choice" data-choice="<%= stage_path(stage.id) %>" stage-id="<%= stage.id %>">
-      <span class="stage-title"><%= stage.title %></span>&nbsp;&nbsp;
-      <span class="stage-group"><%= stage.group %></span><br>
-      <span class="stage-detail">
-        <%= datejapan_short(stage.startdate) %>～ <%= datejapan_short(stage.enddate) %><br>
-        <%= stage.theater %>&nbsp;&nbsp;
-      </span>
-      <%= link_to "", "", class: "glyphicon icon-link star " + glyphicon_star(stage.id) %>
-      <%= #link_to "", stage, class: "glyphicon glyphicon-envelope icon-link-mail"
-      %>
-    </div>
-      
+    <%= render 'stage', stage: stage %>
 <% end %>
-
-<%= render 'counter' %>
-
-<div style="text-align: center">
-<%= paginate @stages %>
 </div>
+<br>
+<div style="text-align: center;" id="loading"></div>
+<div style="display: none" id="pages"></div>

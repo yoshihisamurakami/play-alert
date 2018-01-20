@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  root 'stages#index'
+  root 'stages#thisweek'
+  
+  get 'stages/playing', to: 'stages#playing'
+  get 'stages/thisweek', to: 'stages#thisweek'
+  get 'stages/later', to: 'stages#later'
+  
   resources :stages, only: [:show]
   post 'alerts/create', to: 'alerts#create'
   get 'help', to: 'static_pages#help'
