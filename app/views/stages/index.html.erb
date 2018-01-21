@@ -9,15 +9,22 @@
 
 <%= @debug %>
 
-<%= link_to "上演中", stages_playing_path %> | 
-<%= link_to "今週〜", stages_thisweek_path %> | 
-<%= link_to "来週以降〜", stages_later_path %>
+<%= link_to "上演中", stages_playing_path, 
+    class: 'stagenavi-playing' + stagenavi_onoff('playing') %> 
+<%= link_to "今週〜", stages_thisweek_path,
+    class: 'stagenavi-thisweek' + stagenavi_onoff('thisweek') %>
+<%= link_to "来週以降〜", stages_later_path,
+    class: 'stagenavi-later' + stagenavi_onoff('later') %>
 
 <div id="stagelist_area">
 <% keydate = '' %>
 <% @stages.each do |stage| %>
 <%   if keydate != stage.startdate %>
-    <div class="stagelist-title<%= " nowplaying" if stage.startdate <= Date.today %>"><%= datejapan(stage.startdate) %></div>
+    <div class="stagelist-title
+      <%= " nowplaying" if stage.startdate <= Date.today %>
+      <%= " later" if stage.startdate > Date.today.end_of_week + 6 %>">
+      <%= datejapan(stage.startdate) %>
+    </div>
     <% keydate = stage.startdate %>
 <%   end %>
     <%= render 'stage', stage: stage %>
@@ -25,4 +32,6 @@
 </div>
 <br>
 <div style="text-align: center;" id="loading"></div>
-<div style="display: none" id="pages"></div>
+
+<form><input type="text" id="pages" value="" style="display: none"></form>
+<div id="page_readed"></div>

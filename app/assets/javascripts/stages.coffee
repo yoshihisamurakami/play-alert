@@ -2,7 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'turbolinks:load', -> 
+$(document).on 'turbolinks:load', ->
+  if $('#pages').val() != '' and $('#page_readed').html() == ''
+    loading_page_on_historyback()
   $('#stagelist_area').on 'click', '.stage-choice', ->
     window.location.href = $(this).attr('data-choice')
   $('#stagelist_area').on 'click', '.star', ->
@@ -46,14 +48,22 @@ $(window).bind("scroll", ->
 
 scrolled_to_bottom = (obj) ->
   if $('#loading').html() == ''
-    loading_page(obj)
+    loading_page()
 
-loading_page = (obj) ->
+loading_page = ->
   $('#loading').html('<img src="/img/loading.gif">')
   page = get_pageno()
-  console.log("page => " + page)
+  #console.log("page => " + page)
   reading_json(page)
 
+loading_page_on_historyback = ->
+  #console.log('loading_page_on_historyback..')
+  $('#loading').html('<img src="/img/loading.gif">')
+  tmp_page = $('#pages').val()
+  for page in [2..tmp_page]
+    #console.log("page(history.back) => " + page)
+    reading_json(page)
+    
 reading_json = (page) ->
   LOADING_END_MARK = '●'
   $.getJSON("?type=json&page=" + page , (data) ->
@@ -62,7 +72,7 @@ reading_json = (page) ->
       return false
     for i in [0..data.length-1]
       $('#stagelist_area').append(get_stage_html(data,i,page))
-    $('#pages').html(page)
+    $('#pages').val(page)
     if data.length < 20
       $('#loading').html(LOADING_END_MARK)
       return false
@@ -70,10 +80,10 @@ reading_json = (page) ->
   )
 
 get_pageno = ->
-  if $('#pages').html() == ''
+  if $('#pages').val() == ''
     return 2
   else
-    return parseInt($('#pages').html()) + parseInt(1)
+    return parseInt($('#pages').val()) + parseInt(1)
 
 get_stage_html = (data,i,page) ->
   html = '<div class="stage-choice" data-choice="' + data[i].url + '" stage-id="' + data[i].id + '">'
@@ -84,5 +94,6 @@ get_stage_html = (data,i,page) ->
   html = html + data[i].theater + '&nbsp;&nbsp;'
   html = html + '</span>'
   html = html + '<a class="glyphicon icon-link star ' + data[i].glyphicon_star + '" href=""></a>'
+  html = html + '#' + page + '#' + i + '#'
   html = html + '</div>'
   return html

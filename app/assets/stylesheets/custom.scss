@@ -99,7 +99,6 @@ body {
   border-bottom: 1px solid #ddd;
 }
 .stage-choice:hover {
-  /*background-color: #ceddff;*/
   background-color: #e8eeee;
   transition-duration: 0.6s;
   cursor : pointer;
@@ -160,6 +159,9 @@ ol {
 }
 .nowplaying {
   background-color: #d783a6;
+}
+.later {
+  background-color: #31a8d5;
 }
 .stage-title {
   font-size: 1.2em;
@@ -389,6 +391,71 @@ input[type=checkbox] {
   padding-left: 0.5em;
   margin-top: 0.5em;
 }
+.stagenavi-playing {
+  color: white;
+  background-color: #d783a6;
+  line-height: 200%;
+  padding: 8px;
+  font-size: 1.2em;
+  border-radius: 4px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &:active {
+    text-decoration: none;
+    color: white;
+  }
+  &:visited {
+    text-decoration: none;
+    color: white;
+  }
+}
+.stagenavi-thisweek {
+  color: white;
+  background-color: #90bc54;
+  line-height: 200%;
+  padding: 8px;
+  font-size: 1.2em;
+  border-radius: 4px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &:active {
+    text-decoration: none;
+    color: white;
+  }
+  &:visited {
+    text-decoration: none;
+    color: white;
+  }
+}
+.stagenavi-later {
+  color: white;
+  background-color: #31a8d5;
+  line-height: 200%;
+  padding: 8px;
+  font-size: 1.2em;
+  border-radius: 4px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &:active {
+    text-decoration: none;
+    color: white;
+  }
+  &:visited {
+    text-decoration: none;
+    color: white;
+  }
+}
+.on {
+  border-bottom: 3px solid #f20;
+}
+
+
 @media screen and (max-width: 767px) {
   body {
     padding: 4em 0;

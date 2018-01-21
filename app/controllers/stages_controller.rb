@@ -21,6 +21,7 @@ class StagesController < ApplicationController
       .order(:startdate, :id)
       .page(params[:page])
     return render json: stages_json if params[:type] == 'json'
+    @view = 'playing'
     render :index
   end
   
@@ -33,6 +34,7 @@ class StagesController < ApplicationController
       .order(:startdate, :id)
       .page(params[:page])
     return render json: stages_json if params[:type] == 'json'
+    @view = 'thisweek'
     render :index
   end
   
@@ -43,6 +45,7 @@ class StagesController < ApplicationController
       .order(:startdate, :id)
       .page(params[:page])
     return render json: stages_json if params[:type] == 'json'
+    @view = 'later'
     render :index
   end
   

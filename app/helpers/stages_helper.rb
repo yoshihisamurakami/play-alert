@@ -36,4 +36,9 @@ module StagesHelper
     return false if str.strip.empty?
     true
   end
+  
+  def stagenavi_onoff(viewname)
+    return ' on' if @view == viewname
+    ''
+  end
 end
