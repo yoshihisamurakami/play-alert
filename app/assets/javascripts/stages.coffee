@@ -55,15 +55,15 @@ loading_page = ->
   page = get_pageno()
   #console.log("page => " + page)
   reading_json(page)
-
+  $('#page_readed').html(page)
 loading_page_on_historyback = ->
   #console.log('loading_page_on_historyback..')
   $('#loading').html('<img src="/img/loading.gif">')
   tmp_page = $('#pages').val()
   for page in [2..tmp_page]
-    #console.log("page(history.back) => " + page)
+    console.log("page(history.back) => " + page)
     reading_json(page)
-    
+    $('#page_readed').html(page)
 reading_json = (page) ->
   LOADING_END_MARK = '●'
   $.getJSON("?type=json&page=" + page , (data) ->
@@ -71,7 +71,8 @@ reading_json = (page) ->
       $('#loading').html(LOADING_END_MARK)
       return false
     for i in [0..data.length-1]
-      $('#stagelist_area').append(get_stage_html(data,i,page))
+      if $('div[stage-id="' + data[i].id + '"]').length == 0
+        $('#stagelist_area').append(get_stage_html(data,i,page))
     $('#pages').val(page)
     if data.length < 20
       $('#loading').html(LOADING_END_MARK)
