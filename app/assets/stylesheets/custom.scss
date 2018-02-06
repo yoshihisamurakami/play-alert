@@ -154,8 +154,9 @@ ol {
   font-size:1.2em;
   background-color: #90bc54;
   color: white;
-  padding: 0.3em;
-  margin: 0.5em 0em;
+  padding: 4px;
+  margin-top: 0.5em;
+  margin-bottom: 0.1em;
 }
 .nowplaying {
   background-color: #d783a6;
@@ -214,11 +215,11 @@ ol {
   bottom: 0;
   box-sizing: border-box;
   background-color: white;
-  border: #999 2px solid;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
   z-index: 1050;
+  max-height: 100%;
+  border: 1px #888 solid;
+  margin: 25px;
+  overflow: scroll;
 }
 
 .popup-close {

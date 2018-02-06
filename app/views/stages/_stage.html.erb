@@ -2,8 +2,8 @@
       <span class="stage-title"><%= stage.title %></span>&nbsp;&nbsp;
       <span class="stage-group"><%= stage.group %></span><br>
       <span class="stage-detail">
-        <%= stage.term %><br>
-        <%= stage.theater %>&nbsp;&nbsp;
+        <span class="stage-term"><%= stage.term %></span><br>
+        <span class="stage-theater"><%= stage.theater %></span>&nbsp;&nbsp;
       </span>
       <%= link_to "", "", class: "glyphicon icon-link star " + glyphicon_star(stage.id) %>
     </div>

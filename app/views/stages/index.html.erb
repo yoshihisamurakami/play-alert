@@ -20,9 +20,7 @@
 <% keydate = '' %>
 <% @stages.each do |stage| %>
 <%   if keydate != stage.startdate %>
-    <div class="stagelist-title
-      <%= " nowplaying" if stage.startdate <= Date.today %>
-      <%= " later" if stage.startdate > Date.today.end_of_week + 6 %>">
+    <div class="stagelist-title <%= stagelist_title_class %>" data-startdate="<%= stage.startdate %>">
       <%= datejapan(stage.startdate) %>
     </div>
     <% keydate = stage.startdate %>
@@ -34,4 +32,6 @@
 <div style="text-align: center;" id="loading"></div>
 
 <form><input type="text" id="pages" value="" style="display: none"></form>
-<div id="page_readed"></div>
+<div id="page_readed" style="display: none"></div>
+
+<%= render 'popup' %>

@@ -41,4 +41,14 @@ module StagesHelper
     return ' on' if @view == viewname
     ''
   end
+  
+  def stagelist_title_class
+    if @view == 'playing'
+      'nowplaying'
+    elsif @view == 'later'
+      'later'
+    else
+      ''
+    end
+  end
 end

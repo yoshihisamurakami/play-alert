@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'stages/playing', to: 'stages#playing'
   get 'stages/thisweek', to: 'stages#thisweek'
   get 'stages/later', to: 'stages#later'
+  get 'stages/detail/:id', to: 'stages#detail'
   
   resources :stages, only: [:show]
   post 'alerts/create', to: 'alerts#create'

@@ -1,34 +1,17 @@
-<!--
+
 <div id="popup">
   <div class="close_overlay"></div>
   <div class="popup-window">
     <div class="popup-close">×</div>
     <div class="popup-stageinfo">
       <div id="popup-title"></div>
-      <div id="popup-group"></div>
+      <span id="popup-group"></span><br>
       <div id="popup-term"></div>
       <div id="popup-theater"></div>
       
-      <div class="popup-alert">メールアドレスを登録すると、指定した日に通知メールが届きます！</div>
+      <div id="popup-detail"></div>
       
-      <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
-      <span>メールアドレス</span><br>
-      <p>
-        <%= f.text_field :email, class: "popup-email", placeholder: "email@example.com" %>
-      </p>
-      
-      <span>いつ通知メールを送りますか？</span>
-      <p>
-        <%= f.check_box :seven_days, {}, "true", "false" %>
-        <span class="alert-text">初日の7日前</span><br>
-        <%= f.check_box :three_days, {}, 'true', 'false' %>
-        <span class="alert-text">初日の3日前</span><br>
-        <%= f.check_box :one_day, {checked: true}, 'true', 'false' %>
-        <span class="alert-text">初日の1日前</span><br>
-      </p>
-      <%= f.submit "OK", class: "btn btn-primary" %>
-      <% end %>
     </div>
   </div>
 </div>
--->
+    

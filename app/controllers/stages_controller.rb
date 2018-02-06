@@ -15,6 +15,12 @@ class StagesController < ApplicationController
     @alert = Alert.new
   end
   
+  def detail
+    @stage_detail = StageDetail.find_by(stage_id: params[:id])
+    json = detail_json
+    render json: json
+  end
+  
   def playing
     @stages = Stage
       .where("startdate <= ?", Date.today)
@@ -70,6 +76,7 @@ class StagesController < ApplicationController
         title: stage.title,
         group: stage.group,
         startdate: stage.startdate,
+        startdatej: datejapan(stage.startdate),
         term: stage.term,
         theater: stage.theater,
         glyphicon_star: glyphicon_star(stage.id),
@@ -78,4 +85,14 @@ class StagesController < ApplicationController
     json
   end
   
+  def detail_json
+    {
+      playwright: is_visible?(@stage_detail.playwright) ? @stage_detail.playwright : '',
+      director: is_visible?(@stage_detail.director) ? @stage_detail.director : '',
+      cast: is_visible?(@stage_detail.cast) ? @stage_detail.cast : '',
+      price: is_visible?(@stage_detail.price) ? @stage_detail.price : '',
+      timetable: is_visible?(@stage_detail.timetable) ? @stage_detail.timetable : '',
+      site: is_visible?(@stage_detail.site) ? @stage_detail.site : '',
+    }
+  end
 end
