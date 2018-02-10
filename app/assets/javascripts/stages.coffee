@@ -12,22 +12,29 @@ $(document).on 'turbolinks:load', ->
   #  alert(page[1])
     #console.log('戻るボタンが押された ' + page[1] )
     #loading_page_on_historyback(page[1])
+  current_scrollY = 0
   $('#stagelist_area').on 'click', '.stage-choice', ->
     $('#popup').css('display', 'block')
     $("body").css('overflow', 'hidden')
-    #get_stageinfo($(this).attr('stage-id'))
+    current_scrollY = $(window).scrollTop()
+    $("body").css('position', 'fixed')
     get_stageinfo($(this))
     #window.location.href = $(this).attr('data-choice')
+    
   $('#stagelist_area').on 'click', '.star', ->
     if $(this).hasClass('glyphicon-star-empty')
       empty_to_star($(this))
     else
       star_to_empty($(this))
     return false
+    
   $('.popup-close').on 'click', ->
     $('#popup').css('display', 'none')
     $('#popup-detail').html('')
     $("body").css('overflow', 'auto')
+    $("body").css('position', 'static')
+    $(window).scrollTop(current_scrollY)
+    
   $('#usermenu_dropdown').on 'click', ->
     if $('#user_menu').css('display') == 'none'
       $('#user_menu').css('display', 'block')
@@ -47,6 +54,7 @@ empty_to_star = (obj)->
 
 star_to_empty = (obj)->
   obj.removeClass('glyphicon-star').addClass('glyphicon-star-empty')
+  obj.css('color','#888')
   id = obj.parent().attr('stage-id')
   $.get '/stars/unset/' + id, (data) ->
     if data.result != 'OK'
@@ -113,7 +121,7 @@ get_stage_html = (data,i,page) ->
   html = html + data[i].theater + '&nbsp;&nbsp;'
   html = html + '</span>'
   html = html + '<a class="glyphicon icon-link star ' + data[i].glyphicon_star + '" href=""></a>'
-  #html = html + '#' + page + '#' + i + '#'
+  # html = html + '#' + page + '#' + i + '#'
   html = html + '</div>'
   return html
 
@@ -125,6 +133,7 @@ get_stagelist_title = (data,i) ->
     title_class = ' later'
   html = '<div class="stagelist-title' + title_class + '" data-startdate="' + data[i].startdate + '">'
   html = html + data[i].startdatej
+  html = html + '<span class="stagelist-tilde">〜</span>'
   html = html + '</div>'
 
 get_stageinfo = (obj) ->
@@ -136,9 +145,10 @@ get_stageinfo = (obj) ->
   $('#popup-group').html(group)
   $('#popup-term').html(term)
   $('#popup-theater').html(theater)
+  $('#popup-detail').html('<div style="text-align: center; margin-top:3em;"><img src="/img/loading.gif"></div>')
+  $('.popup-bottom').css('display', 'none')
   
   $.getJSON('/stages/detail/' + obj.attr('stage-id'), (data) ->
-    #console.log(data)
     $('#popup-detail').html('')
     if data.playwright != ''
       $('#popup-detail').append( get_stagedetail_html('脚本', data.playwright))
@@ -151,10 +161,20 @@ get_stageinfo = (obj) ->
     if data.timetable != ''
       $('#popup-detail').append( get_stagedetail_html('タイムテーブル', data.timetable))
     if data.site != ''
-      $('#popup-detail').append( get_stagedetail_html('公式サイト', data.site))
+      $('#popup-detail').append( get_stagedetail_link_html('公式サイト', data.site))
+    if $("#popup-stagelink")[0]
+      $("#popup-stagelink").attr("href", "/stages/" + obj.attr('stage-id'))
+    $('.popup-bottom').css('display', 'block')
   )
 
 get_stagedetail_html = (title, str) ->
-  html = '<div class="detail-title">' + title + '</div>'
-  html = html + '<div class="detail-content">' + str + '</div>'
-  return html
+  return """
+<div class="detail-title">#{title}</div>
+<div class="detail-content">#{str}</div>
+"""
+
+get_stagedetail_link_html = (title, str) ->
+  return """
+<div class="detail-title">#{title}</div>
+<div class="detail-content"><a href="#{str}" target="_blank">#{str}</a></div>
+"""

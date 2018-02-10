@@ -10,8 +10,21 @@
       <div id="popup-theater"></div>
       
       <div id="popup-detail"></div>
-      
+      <br><br>
+      <div class="popup-bottom">
+<% if logged_in? %>
+  <%= link_to "この公演のアラートメールを受け取る", "", class: "btn btn-danger", id: "popup-stagelink" %>
+<% else %>
+  <div class="tips">
+    この公演が始まる前にアラートメールを受け取りたい場合は、ユーザー登録してログインしてください。
+  </div>
+  <%= link_to "新規ユーザー登録", signup_path, class: "btn btn-info" %>
+  <%= link_to "ログイン", login_path, class: "btn btn-info" %>
+<% end %>
+      </div>
+      <hr>
     </div>
   </div>
+
 </div>
     

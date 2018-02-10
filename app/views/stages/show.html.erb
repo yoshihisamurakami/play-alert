@@ -51,8 +51,12 @@
 <% end %>
 
 <% if logged_in? %>
+  <% if @stage.startdate <= Date.today %>
+    <br>
+    <span style="color: #888;">この公演は初日を迎えたものなので、初日より前にアラートメールを送る機能は無効になります。</span>
+  <% else %>
 <section>
-  <div class="alert-on-notlogin">
+  div class="alert-on-notlogin">
     <%= form_for(@alert, url: {controller: 'alerts', action: 'create'}) do |f| %>
     
     <%= f.hidden_field :stage_id, value: @stage.id %>
@@ -70,7 +74,11 @@
     <% end %>
   </div>
 </section>
+  <% end %>
+  
 <% else %>
   <br>
-  <span class="popup-alert">公演が始まる前に通知でお知らせを受けたい場合は、ログインしてください！</span>
+  <div class="tips">
+    公演が始まる前に通知でお知らせを受けたい場合は、ログインしてください！
+  </div>
 <% end %>

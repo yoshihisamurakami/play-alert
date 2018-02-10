@@ -2,12 +2,20 @@
 <div class="signup">
   <% if !logged_in? %>
     <%= link_to "新規ユーザー登録", signup_path, class: "btn btn-info" %>
+    <%= link_to "ログイン", login_path, class: "btn btn-info" %>
+  <% else %>
+    ログイン中: <%= current_user.name %>さん<br>
+    <%= link_to "ログアウト", logout_path, method: :delete %>
   <% end %>
 </div>
 
 <%= render 'counter' %>
 
 <%= @debug %>
+
+<div class="tips tips-head">
+  観たい・気になる公演の☆マークをつけると、その公演のスケジュールがカレンダー（右上のアイコン）に登録されます！
+</div>
 
 <%= link_to "上演中", stages_playing_path, 
     class: 'stagenavi-playing' + stagenavi_onoff('playing') %> 
@@ -21,7 +29,7 @@
 <% @stages.each do |stage| %>
 <%   if keydate != stage.startdate %>
     <div class="stagelist-title <%= stagelist_title_class %>" data-startdate="<%= stage.startdate %>">
-      <%= datejapan(stage.startdate) %>
+      <%= datejapan(stage.startdate) %><span class="stagelist-tilde">〜</span>
     </div>
     <% keydate = stage.startdate %>
 <%   end %>

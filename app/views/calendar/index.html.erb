@@ -3,3 +3,10 @@
 <% end %>
 
 <div id="calendar"></div>
+
+<% if !logged_in? %>
+<div class="tips">
+  ☆マークの情報はブラウザを閉じると消えてしまいます。　<br>
+  消えないようにしたい場合は、ログインしてください。<br>
+</div>
+<% end %>

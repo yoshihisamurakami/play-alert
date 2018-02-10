@@ -151,12 +151,21 @@ ol {
 }
 
 .stagelist-title {
-  font-size:1.2em;
+  font-size:1.1em;
   background-color: #90bc54;
   color: white;
-  padding: 4px;
-  margin-top: 0.5em;
+  padding: 3px;
+  margin-top: 8px;
   margin-bottom: 0.1em;
+}
+.stagelist-title:first-child {
+  margin-top: 10px;
+}
+.stagelist-tilde {
+  font-size: 0.8em;  
+}
+.stagelist-tilde:before {
+  content: " ";
 }
 .nowplaying {
   background-color: #d783a6;
@@ -223,7 +232,7 @@ ol {
 }
 
 .popup-close {
-  font-size: 2.5em;
+  font-size: 1.5em;
   margin-right: 14px;
   color: #bbb;
   background-color: white;
@@ -267,8 +276,12 @@ ol {
   font-size: 1.2em;
   padding: 6px;
 }
-
-
+.popup-bottom {
+  display: none;
+}
+.popup-bottom-message {
+  color: #888;
+}
 div.fc-left h2 {
   font-size: 1.5em;
 }
@@ -396,8 +409,9 @@ input[type=checkbox] {
   color: white;
   background-color: #d783a6;
   line-height: 200%;
-  padding: 8px;
-  font-size: 1.2em;
+  padding: 8px 10px;
+  
+  font-size: 1.0em;
   border-radius: 4px;
   &:hover {
     text-decoration: none;
@@ -416,8 +430,8 @@ input[type=checkbox] {
   color: white;
   background-color: #90bc54;
   line-height: 200%;
-  padding: 8px;
-  font-size: 1.2em;
+  padding: 8px 10px;
+  font-size: 1.0em;
   border-radius: 4px;
   &:hover {
     text-decoration: none;
@@ -436,8 +450,8 @@ input[type=checkbox] {
   color: white;
   background-color: #31a8d5;
   line-height: 200%;
-  padding: 8px;
-  font-size: 1.2em;
+  padding: 8px 10px;
+  font-size: 1.0em;
   border-radius: 4px;
   &:hover {
     text-decoration: none;
@@ -456,6 +470,16 @@ input[type=checkbox] {
   border-bottom: 3px solid #f20;
 }
 
+.tips {
+  background-color: #ffebcd;
+  color: #c88;
+  border:#ccc 1px solid;
+  padding: 6px;
+  margin: 6px; 
+}
+.tips-head {
+  margin-bottom: 1.5em;
+}
 
 @media screen and (max-width: 767px) {
   body {
@@ -478,10 +502,10 @@ input[type=checkbox] {
   }
   .popup-window {
     top: 0;
-    width: 96%;
-    height: 96%;
-    margin: 2% 2%;
-    padding: 0.2em 0.5em;
+    width: 98%;
+    height: 98%;
+    margin: 1%;
+    padding: 1%;
   }
   .popup-alert {
     font-size: 1em;
@@ -489,7 +513,7 @@ input[type=checkbox] {
   .popup-stageinfo {
     width: 100%;
     margin: 2px 0;
-    padding: 0 6px;
+    padding: 1em 6px;
   }
   #popup-title {
     font-size: 1.6em;
