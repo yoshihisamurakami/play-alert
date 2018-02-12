@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   delete  '/logout', to: 'sessions#destroy'
   resources :users
 
+  get 'stage_search/', to: 'stage_search#index'
+  post 'stage_search/', to: 'stage_search#search'
 end

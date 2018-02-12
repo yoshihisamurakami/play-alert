@@ -1,0 +1,17 @@
+
+<%= render 'shared/header_signup' %>
+
+<h3>検索結果</h3>
+<%= @debug %>
+<% if !@stages %>
+  該当する公演情報は見つかりませんでした。<br>
+<% else %>
+<div id="stagelist_area">
+  <div class="stagelist-title">検索結果&nbsp;（<%= @stages.count %>件）</div>
+  <% @stages.each do |stage| %>
+    <%= render 'stages/stage', stage: stage %>
+  <% end %>
+</div>
+<% end %>
+
+<%= render 'stages/popup' %>

@@ -1,0 +1,9 @@
+<div class="signup">
+  <% if !logged_in? %>
+    <%= link_to "新規ユーザー登録", signup_path, class: "btn btn-info" %>
+    <%= link_to "ログイン", login_path, class: "btn btn-info" %>
+  <% else %>
+    ログイン中: <%= current_user.name %>さん<br>
+    <%= link_to "ログアウト", logout_path, method: :delete %>
+  <% end %>
+</div>

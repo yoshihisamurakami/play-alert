@@ -1,0 +1,12 @@
+
+<%= render 'shared/header_signup' %>
+
+<h3>公演情報の検索</h3>
+<%= form_for(@stage_search, url: stage_search_path) do |f|%>
+  <div class="row">
+    <div class="col-sm-2"><%= f.label :name, '検索ワード:' %></div>
+    <div class="col-sm-10"><%= f.text_field :word %></div>
+
+    <%= f.submit '検索する', class: "btn btn-info" %>
+  </div>
+<% end %>
