@@ -129,19 +129,33 @@ body {
   padding-left: 2px;
   padding-right: 4px;
 }
-
-.help-title {
-  font-size: 1.5em;
-  color: darkgreen;
+.help-page h1 {
+  font-size: 1.3em;
+  color: #222;
+  border-bottom: 1px solid #888;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
+
 .help-title:nth-child(n + 2) {
   margin-top: 1.2em;
 }
+.help-page p {
+  line-height: 1.5em;
+  color: #444;
+  font-size: 1.1em;  
+}
+.sub-msg {
+  font-size: 0.8em;
+  color: #888;
+}
+/*
 .help-body {
   line-height: 1.5em;
   color: #555;
   font-size: 1.1em;
 }
+*/
 ol {
   padding-left: 1.2em;
 }
