@@ -1,0 +1,25 @@
+<div class="help-page">
+  <h1>お問い合わせ</h1>
+  <p>
+    <ul>
+      <li>使い方に関してのご質問</li>
+      <li>新しい機能のご要望</li>
+      <li>ご意見・ご感想</li>
+    </ul>
+    等々ございましたら、こちらのフォームからお気軽にお問い合わせください！
+  </p>
+  <br>
+  <%= form_for(@contact, url: contact_confirm_path) do |f|%>
+  <div class="row">
+    <div class="col-sm-12"><%= f.label :name, 'お名前（任意）:' %></div>
+    <div class="col-sm-12"><%= f.text_field :name %></div>
+
+    <div class="col-sm-12"><%= f.label :body, 'お問い合わせの内容:' %></div>
+    <div class="col-sm-12"><%= f.text_area :body, rows: 6 %></div>
+    
+    <div class="col-sm-12">&nbsp;</div>
+    <%= f.submit '確認', class: "btn btn-info" %>
+  </div>
+<% end %>
+
+</div>

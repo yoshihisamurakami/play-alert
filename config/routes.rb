@@ -21,4 +21,8 @@ Rails.application.routes.draw do
 
   get 'stage_search/', to: 'stage_search#index'
   post 'stage_search/', to: 'stage_search#search'
+  
+  get  'contact',         to: 'contacts#index'
+  post 'contact/confirm', to: 'contacts#confirm'
+  post 'contact/sent',    to: 'contacts#sent'
 end

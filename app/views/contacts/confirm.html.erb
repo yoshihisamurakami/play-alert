@@ -1,0 +1,20 @@
+<div class="help-page">
+  <h1>お問い合わせの確認</h1>
+  <div class="row">
+    <div class="col-sm-12">お名前 : </div>
+    <div class="col-sm-12" style="color: #44f;"><%= @contact.name %></div>
+    <div class="col-sm-12"><br></div>
+    
+    <div class="col-sm-12">お問い合わせ内容 : </div>
+    <div class="col-sm-12" style="color: #44f;"><%= @contact.body %></div>
+
+  </div>
+  
+  <%= form_for(@contact, url: contact_sent_path) do |f| %>
+    <%= f.hidden_field :name, value: @contact.name %>
+    <%= f.hidden_field :body, value: @contact.body %>
+  以上の内容でよろしいでしょうか？<br>
+  <%= f.submit '送信', class: "btn btn-info" %>
+  <% end %>
+
+</div>

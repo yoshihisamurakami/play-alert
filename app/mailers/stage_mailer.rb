@@ -25,6 +25,12 @@ class StageMailer < ApplicationMailer
     mail to: mail_to, subject: subject
   end
   
+  def contact(contact)
+    @contact = contact
+    subject = "[PLAY ALERT] お問い合わせが来ました。"
+    mail to: "muranet+playalert@gmail.com", subject: subject
+  end
+  
   def dayscount(alert)
     today = Date.today
     diff = alert.stage.startdate - today
