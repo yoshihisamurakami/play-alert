@@ -1,20 +1,44 @@
 class Tasks::GetStagesData
   STAGES_URL = 'http://stage.corich.jp/stage/start'.freeze
+  STAGES_DOMAIN = 'http://stage.corich.jp'.freeze
   STAGE_TEST_URL = '/home/ubuntu/workspace/play-alert/test/fixtures/files/stage.html'.freeze
-
+  TIMEOUT = 10.freeze
+  
   class << self
     def execute
       delete_past_stages
 
-      for page in 1..30 do
+      after_update = []
+      before_update = Stage.pluck(:id)
+
+      page = 1
+      loop do
         stages = StagesHtmlParser.parse( stages_url(page) )
         stages.each do |stage|
-          save_or_update_stage(stage)
+          stage_id = save_or_update_stage(stage)
+          after_update << stage_id if stage_id
         end
         break if stages.count < 20
-        sleep 1
+        page += 1
+        sleep 2
       end
-
+      
+      tocheck = before_update - after_update
+      message = ''
+      #puts "to_check => "
+      tocheck.each do |id|
+        stage = Stage.find(id)
+        
+        status = Timeout.timeout(TIMEOUT) {
+          Net::HTTP.get_response(URI.parse(STAGES_DOMAIN + stage.url)).code
+        }
+        sleep 2
+        message += stage.url + " " + status + "\n"
+        if status != "200"
+          stage.destroy
+        end
+      end
+      StageMailer.getstages_message(message).deliver_now
     end
     
     # 公演最終日が前日より前の舞台情報は削除
@@ -31,7 +55,6 @@ class Tasks::GetStagesData
     end
     
     def save_or_update_stage(stage)
-      #puts "url => " + stage[:url]
       if Stage.find_by(url: stage[:url]).nil?
         save(stage)
       else
@@ -43,6 +66,7 @@ class Tasks::GetStagesData
       @stage = Stage.new(stage_db(stage))
       if @stage.save
         #puts "保存成功 url => " + stage[:url]
+        @stage.id
       else
         #puts "保存失敗 url => " + stage[:url]
       end
@@ -53,6 +77,7 @@ class Tasks::GetStagesData
       #puts "update id => " + old.id.to_s
       if old.update_attributes( stage_db(stage) )
         #puts "更新成功 url => " + stage[:url]
+        old.id
       else
         #puts "更新失敗 url => " + stage[:url]
       end
