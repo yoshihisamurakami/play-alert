@@ -22,14 +22,14 @@ module GetStageDetailsHelper
       next unless need_update?(stage.id)
       puts "details update!"
       
-      html = get_html(CORICH_URL_DOMAIN + stage.url)
-      next if !html
+      #html = get_html(CORICH_URL_DOMAIN + stage.url)
+      #next if !html
       
-      detail = get_detailinfo(html[:html], html[:charset])
+      #detail = get_detailinfo(html[:html], html[:charset])
       
-      save_detail(stage.id, detail)
+      #save_detail(stage.id, detail)
       count += 1
-      sleep 2
+      #sleep 2
     end
     puts "更新件数 => " + count.to_s
     return
