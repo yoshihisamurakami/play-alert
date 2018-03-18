@@ -14,22 +14,22 @@ module GetStageDetailsHelper
   
   def get_stage_details
     puts "get_stage_details helper start!!"
-    
+
     stages = Stage.all
     count=0
-    stages.each do |stage| 
-      puts stage.title + " " + stage.url
+    stages.each do |stage|
       next unless need_update?(stage.id)
-      puts "details update!"
+      puts stage.id.to_s + " " + stage.title + " " + stage.url
+      #puts "details update!"
+
+      html = get_html(CORICH_URL_DOMAIN + stage.url)
+      next if !html
       
-      #html = get_html(CORICH_URL_DOMAIN + stage.url)
-      #next if !html
-      
-      #detail = get_detailinfo(html[:html], html[:charset])
-      
-      #save_detail(stage.id, detail)
+      detail = get_detailinfo(html[:html], html[:charset])
+      save_detail(stage.id, detail)
       count += 1
-      #sleep 2
+      
+      sleep 2
     end
     puts "更新件数 => " + count.to_s
     return
@@ -68,6 +68,7 @@ module GetStageDetailsHelper
         end
       end
     end
+    details[:crawl_date] = Time.current
     details
   end
   
