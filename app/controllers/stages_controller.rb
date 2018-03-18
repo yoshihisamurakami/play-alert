@@ -17,8 +17,12 @@ class StagesController < ApplicationController
   
   def detail
     @stage_detail = StageDetail.find_by(stage_id: params[:id])
-    json = detail_json
-    render json: json
+    if @stage_detail
+      json = detail_json
+      render json: json
+    else
+      render json: {status: "notfound"}
+    end
   end
   
   def playing

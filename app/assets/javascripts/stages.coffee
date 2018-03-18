@@ -150,6 +150,10 @@ get_stageinfo = (obj) ->
   
   $.getJSON('/stages/detail/' + obj.attr('stage-id'), (data) ->
     $('#popup-detail').html('')
+    if data.status == "notfound"
+      $('.popup-bottom').css('display', 'block')
+      return
+
     if data.playwright != ''
       $('#popup-detail').append( get_stagedetail_html('脚本', data.playwright))
     if data.director != ''
