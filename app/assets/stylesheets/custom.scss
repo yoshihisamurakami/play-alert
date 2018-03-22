@@ -246,8 +246,9 @@ ol {
 }
 
 .popup-close {
-  font-size: 1.5em;
+  font-size: 2.5em;
   margin-right: 14px;
+  margin-top: -6px;
   color: #bbb;
   background-color: white;
   float: right;
@@ -408,10 +409,13 @@ input[type=checkbox] {
 }
 
 .detail-title {
-  background-color: #aaf;
-  color: #fff;
+  /*background-color: #dff0f5;*/
+  background-color: #dff0ff;
+  color: #666;
+  /*color: #fff;*/
   margin-top: 1em;
   padding: 2px 0.5em;
+  border-bottom: 1px solid #bfd0d5;
 }
 .detail-content {
   color: #222;
@@ -480,6 +484,19 @@ input[type=checkbox] {
     color: white;
   }
 }
+.later-list {
+  display: none;
+  border: 1px solid #ccc;
+  margin-top: 0.5em;
+  text-align: left;
+  width: 300px;
+  line-height: 2em;
+  list-style: none;
+  padding-left: 1em;
+  li {
+    color: #888;
+  }
+}
 .on {
   border-bottom: 3px solid #f20;
 }
@@ -518,6 +535,7 @@ input[type=checkbox] {
     top: 0;
     width: 98%;
     height: 98%;
+    word-wrap: break-word;
     margin: 1%;
     padding: 1%;
   }
@@ -525,8 +543,8 @@ input[type=checkbox] {
     font-size: 1em;
   }
   .popup-stageinfo {
-    width: 100%;
-    margin: 2px 0;
+    width: 98%;
+    margin: 1em 1% 2px 1%;
     padding: 1em 6px;
   }
   #popup-title {
