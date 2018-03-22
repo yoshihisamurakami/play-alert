@@ -2,8 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'turbolinks:load', ->
-  $('#calendar').fullCalendar(
-    events:window.datas,
-    lang: 'ja',
-    height: window.innerHeight - 80,
-  )
+  if $('#calendar').html() == ''
+    $('#calendar').fullCalendar(
+      events:window.datas,
+      lang: 'ja',
+      height: window.innerHeight - 80,
+    )
