@@ -14,9 +14,14 @@
     class: 'stagenavi-playing' + stagenavi_onoff('playing') %> 
 <%= link_to "今週〜", stages_thisweek_path,
     class: 'stagenavi-thisweek' + stagenavi_onoff('thisweek') %>
-<%= link_to "来週以降〜", stages_later_path,
-    class: 'stagenavi-later' + stagenavi_onoff('later') %>
-
+<%= link_to '#', #stages_later_path,
+    class: 'stagenavi-later' + stagenavi_onoff('later') do %>
+    来週以降〜&nbsp;<span class="glyphicon glyphicon-chevron-down" style="font-size: 0.8em"></span>
+<% end %>
+<ul class="later-list">
+    <li>3月1日（日）〜3月7日（土）</li>
+    <li>3月11日（日）〜3月17日（土）</li>
+</ul>
 <div id="stagelist_area">
 <% keydate = '' %>
 <% @stages.each do |stage| %>

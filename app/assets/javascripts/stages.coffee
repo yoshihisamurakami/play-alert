@@ -44,7 +44,11 @@ $(document).on 'turbolinks:load', ->
     if (!$(event.target).closest('#usermenu_dropdown').length) and (!$(event.target).closest('#user_menu').length)
       if $('#user_menu').css('display') == 'block'
         $('#user_menu').css('display', 'none')
-
+        
+  $('.stagenavi-later').on 'click', ->
+    $('.later-list').css('display', 'block')
+    return false
+    
 empty_to_star = (obj)->
   obj.removeClass('glyphicon-star-empty').addClass('glyphicon-star')
   id = obj.parent().attr('stage-id')
