@@ -3,15 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'turbolinks:load', ->
-  # 方法1 *** iphone chromeで #pages が消えるので却下
-  #if $('#pages').val() != '' and $('#page_readed').html() == ''
-  #  loading_page_on_historyback()
-  # 方法2
-  #page = location.href.match(/\#([0-9]+)$/)
-  #if page != null
-  #  alert(page[1])
-    #console.log('戻るボタンが押された ' + page[1] )
-    #loading_page_on_historyback(page[1])
   current_scrollY = 0
   $('#stagelist_area').on 'click', '.stage-choice', ->
     $('#popup').css('display', 'block')
@@ -46,7 +37,10 @@ $(document).on 'turbolinks:load', ->
         $('#user_menu').css('display', 'none')
         
   $('.stagenavi-later').on 'click', ->
-    $('.later-list').css('display', 'block')
+    if $('.later-list').css('display') == 'none'
+      $('.later-list').css('display', 'block')
+    else
+      $('.later-list').css('display', 'none')
     return false
     
 empty_to_star = (obj)->

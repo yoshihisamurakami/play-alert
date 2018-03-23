@@ -483,10 +483,14 @@ input[type=checkbox] {
     text-decoration: none;
     color: white;
   }
+  &:link {
+    text-decoration: none;
+  }
 }
 .later-list {
   display: none;
   border: 1px solid #ccc;
+  color: white;
   margin-top: 0.5em;
   text-align: left;
   width: 300px;

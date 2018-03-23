@@ -18,10 +18,17 @@
     class: 'stagenavi-later' + stagenavi_onoff('later') do %>
     来週以降〜&nbsp;<span class="glyphicon glyphicon-chevron-down" style="font-size: 0.8em"></span>
 <% end %>
+
 <ul class="later-list">
-    <li>3月1日（日）〜3月7日（土）</li>
-    <li>3月11日（日）〜3月17日（土）</li>
+<% @stages_on_weeks.each do |stage_on_week| %>
+    <li>
+        <%= stage_on_week[:firstday].strftime('%Y-%m-%d') %>〜 
+        <%= (stage_on_week[:firstday] + 6).strftime('%Y-%m-%d') %>&nbsp;
+        (<%= stage_on_week[:size] %>件)
+    </li>
+<% end %>
 </ul>
+
 <div id="stagelist_area">
 <% keydate = '' %>
 <% @stages.each do |stage| %>

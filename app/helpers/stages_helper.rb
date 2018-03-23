@@ -1,6 +1,8 @@
 
 module StagesHelper
-
+  CWDAY_SATURDAY = 6
+  CWDAY_SUNDAY   = 7
+  
   def dayoftheweek(date)
     %w(日 月 火 水 木 金 土 日)[date.cwday]
   end
@@ -51,4 +53,25 @@ module StagesHelper
       ''
     end
   end
+  
+  def firstofweek(date)
+    return date if date.cwday == CWDAY_SUNDAY
+    firstofweek date - 1
+  end
+
+  def lastofweek(date)
+    return date if date.cwday == CWDAY_SATURDAY
+    lastofweek date + 1
+  end
+  
+  def nextweek_first(date)
+    date += 7
+    firstofweek date
+  end
+  
+  def nextweek_last(date)
+    date += 7
+    lastofweek date
+  end
+
 end

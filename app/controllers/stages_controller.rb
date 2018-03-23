@@ -1,6 +1,7 @@
 class StagesController < ApplicationController
   include StagesHelper
-
+  before_action :set_stages_on_weeks
+  
   def index
     today = Date.today
     @stages = Stage
@@ -61,15 +62,39 @@ class StagesController < ApplicationController
   
   private
   
+  def set_stages_on_weeks
+    date = Date.today
+    @stages_on_weeks = []
+    loop do
+      firstday = nextweek_first date
+      count = oneweek_stages_count firstday
+      break if count == 0
+      @stages_on_weeks.push({
+        firstday: firstday,
+        size: count,
+      })
+      date = firstday
+    end
+  end
+  
+  def oneweek_stages_count(firstday_of_week)
+    Stage
+      .where("startdate >= ?", firstday_of_week)
+      .where("startdate <= ?", firstday_of_week + 6)
+      .size
+  end
+  
+=begin  
   def firstofweek(date)
     return date if date.cwday == 7
     firstofweek(date-1)
   end
-  
+
   def lastofweek(date)
     return date if date.cwday == 6
     lastofweek(date+1)
   end
+=end
 
   def stages_json
     json = []

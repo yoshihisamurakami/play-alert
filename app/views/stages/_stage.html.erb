@@ -1,9 +1,9 @@
-    <div class="stage-choice" data-choice="<%= stage_path(stage.id) %>" stage-id='<%= stage.id %>' >
-      <span class="stage-title"><%= stage.title %></span>&nbsp;&nbsp;
-      <span class="stage-group"><%= stage.group %></span><br>
-      <span class="stage-detail">
-        <span class="stage-term"><%= stage.term %></span><br>
-        <span class="stage-theater"><%= stage.theater %></span>&nbsp;&nbsp;
-      </span>
+    <%= content_tag(:div, class: "stage-choice", 'data-choice' => stage_path(stage.id), 'stage-id' => stage.id) do %>
+      <%= content_tag(:span, stage.title, class: "stage-title") %>&nbsp;&nbsp;
+      <%= content_tag(:span, stage.group, class: "stage-group") %><br>
+      <%= content_tag(:span, class: "stage-detail") do %>
+        <%= content_tag(:span, stage.term, class: "stage-term") %><br>
+        <%= content_tag(:span, stage.theater, class: "stage-theater") %>&nbsp;&nbsp;
+      <% end %>
       <%= link_to "", "", class: "glyphicon icon-link star " + glyphicon_star(stage.id) %>
-    </div>
+    <% end %>
