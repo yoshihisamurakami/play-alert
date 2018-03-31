@@ -42,6 +42,11 @@ $(document).on 'turbolinks:load', ->
     else
       $('.later-list').css('display', 'none')
     return false
+  $('.pagetop').on 'click', ->
+    $('body,html').animate({
+      scrollTop: 0}
+    ,500);
+    return false;
     
 empty_to_star = (obj)->
   obj.removeClass('glyphicon-star-empty').addClass('glyphicon-star')
@@ -65,6 +70,10 @@ $(window).bind("scroll", ->
 
   if ((scrollHeight - scrollPosition) / scrollHeight <= 0.05)
     scrolled_to_bottom(obj)
+  if $(this).scrollTop() > 160
+   $(".pagetop").fadeIn()
+  if $(this).scrollTop() <= 160
+   $(".pagetop").fadeOut()
 )
 
 scrolled_to_bottom = (obj) ->
@@ -86,7 +95,12 @@ loading_page_on_historyback = (tmp_page) ->
 
 reading_json = (page) ->
   LOADING_END_MARK = '●'
-  $.getJSON("?type=json&page=" + page, (data) ->
+  if window.location.search != ''
+    json_url = window.location.search + "&type=json&page=" + page
+  else
+    json_url = "?type=json&page=" + page
+
+  $.getJSON(json_url, (data) ->
     if data.length == 0
       $('#loading').html(LOADING_END_MARK)
       return false

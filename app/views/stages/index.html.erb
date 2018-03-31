@@ -22,9 +22,9 @@
 <ul class="later-list">
 <% @stages_on_weeks.each do |stage_on_week| %>
     <li>
-        <%= stage_on_week[:firstday].strftime('%Y-%m-%d') %>〜 
-        <%= (stage_on_week[:firstday] + 6).strftime('%Y-%m-%d') %>&nbsp;
-        (<%= stage_on_week[:size] %>件)
+        <%= link_to stage_on_week[:firstday].strftime('%Y-%m-%d') + "〜" + 
+            (stage_on_week[:firstday] + 6).strftime('%Y-%m-%d') + " (" + stage_on_week[:size].to_s + "件)",
+            "/stages/later?start=" + stage_on_week[:firstday].strftime('%Y%m%d') %>
     </li>
 <% end %>
 </ul>
@@ -42,6 +42,8 @@
 <% end %>
 </div>
 <br>
+<a href="" class="pagetop"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
 <div style="text-align: center;" id="loading"></div>
 
 <form><input type="text" id="pages" value="" style="display: none"></form>

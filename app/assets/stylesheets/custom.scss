@@ -485,20 +485,33 @@ input[type=checkbox] {
   }
   &:link {
     text-decoration: none;
+    color: white;
   }
 }
 .later-list {
   display: none;
   border: 1px solid #ccc;
-  color: white;
+  color: #228;
   margin-top: 0.5em;
   text-align: left;
-  width: 300px;
+  width: 260px;
   line-height: 2em;
   list-style: none;
-  padding-left: 1em;
+  background: #eef;
+  border-radius: 4px;
+  padding-left: 0;
+  opacity: 0.6;
   li {
-    color: #888;
+    padding-left: 1em;
+    border-bottom: 1px solid #ccc;
+    a {
+      text-decoration: none;
+      color: #228;
+    }
+    &:hover {
+      color: #228;
+      background: #ccc;
+    }
   }
 }
 .on {
@@ -515,7 +528,29 @@ input[type=checkbox] {
 .tips-head {
   margin-bottom: 1.5em;
 }
-
+.pagetop {
+  display: none;
+  position: fixed;
+  background: #aaf;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 20px;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  padding-top: 7px;
+  opacity: 0.5;
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  &:hover {
+    color: white;
+  }
+}
 @media screen and (max-width: 767px) {
   body {
     padding: 4em 0;

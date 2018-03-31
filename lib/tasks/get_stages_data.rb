@@ -29,9 +29,14 @@ class Tasks::GetStagesData
       tocheck.each do |id|
         stage = Stage.find(id)
         
-        status = Timeout.timeout(TIMEOUT) {
-          Net::HTTP.get_response(URI.parse(STAGES_DOMAIN + stage.url)).code
-        }
+        begin
+          status = Timeout.timeout(TIMEOUT) {
+            Net::HTTP.get_response(URI.parse(STAGES_DOMAIN + stage.url)).code
+          }
+        rescue Timeout::Error
+          puts "Timeout .. " + STAGES_DOMAIN + stage.url
+          status = "-" 
+        end
         sleep 2
         message += stage.url + " " + status + "\n"
         if status != "200"

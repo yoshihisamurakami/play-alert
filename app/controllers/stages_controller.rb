@@ -50,11 +50,21 @@ class StagesController < ApplicationController
   end
   
   def later
-    last  = lastofweek(Date.today)
-    @stages = Stage
-      .where("startdate > ?", last)
-      .order(:startdate, :id)
-      .page(params[:page])
+    if params[:start].nil?
+      last  = lastofweek(Date.today)
+      @stages = Stage
+        .where("startdate > ?", last)
+        .order(:startdate, :id)
+        .page(params[:page])
+    else
+      start = DateTime.strptime(params[:start], "%Y%m%d")
+      @stages = Stage
+        .where("startdate >= ?", start)
+        .where("startdate <= ?", start + 6)
+        .order(:startdate, :id)
+        .page(params[:page])
+    end
+    
     return render json: stages_json if params[:type] == 'json'
     @view = 'later'
     render :index
