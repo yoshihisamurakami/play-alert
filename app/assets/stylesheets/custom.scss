@@ -363,6 +363,18 @@ input[type=checkbox] {
   width: 20px;
 }
 
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+  input[type=checkbox] {
+    margin-left: 0px;
+  }
+}
+
 #usermenu_dropdown:hover {
   cursor : pointer;
 }
