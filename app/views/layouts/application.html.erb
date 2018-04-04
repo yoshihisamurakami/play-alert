@@ -41,13 +41,9 @@
     
     <div class="container">
       <% flash.each do |message_type, message| %>
-        <% if message_type == 'sucess' %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
-        <% end %>
       <% end %>
-      <%= render "shared/error_messages_flash" %>
-
-    <%= yield %>
+      <%= yield %>
     </div>
   </body>
 </html>

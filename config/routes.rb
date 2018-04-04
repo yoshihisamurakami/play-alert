@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   get  'contact',         to: 'contacts#index'
   post 'contact/confirm', to: 'contacts#confirm'
   post 'contact/sent',    to: 'contacts#sent'
+  
+  resources :password_resets, only: [:new, :create, :edit, :update]
 end
