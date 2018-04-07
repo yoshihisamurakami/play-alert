@@ -9,24 +9,23 @@ module StagesHelper
   
   # 2017-10-18 ->  2017年10月18日(水) 
   def datejapan(date)
-    year  = date.to_s[0, 4]
-    month = cut_firstzero(date.to_s[5, 2])
-    day   = cut_firstzero(date.to_s[8, 2])
-    
-    year + "年" + month + "月" + day + "日(" + dayoftheweek(date) + ")"
+    if m = date.to_s.match(/(?<year>\d+)-(?<month>\d+)-(?<day>\d+)/)
+      m[:year] + "年" + cut_firstzero(m[:month]) + "月" + cut_firstzero(m[:day]) + "日" + "(" + dayoftheweek(date) + ")"
+    else 
+      ''
+    end
   end
   
   def datejapan_short(date)
-    month = cut_firstzero(date.to_s[5, 2])
-    day   = cut_firstzero(date.to_s[8, 2])
-    month + "月" + day + "日(" + dayoftheweek(date) + ")"
+    if m = date.to_s.match(/(?<year>\d+)-(?<month>\d+)-(?<day>\d+)/)
+      cut_firstzero(m[:month]) + "月" + cut_firstzero(m[:day]) + "日" + "(" + dayoftheweek(date) + ")"
+    else
+      ''
+    end
   end
   
   def cut_firstzero(str)
-    if m = /0([1-9])/.match(str)
-      str = m[1].to_s
-    end
-    str
+    str.gsub(/0([1-9])/, '\1')
   end
   
   def glyphicon_star(stage_id)

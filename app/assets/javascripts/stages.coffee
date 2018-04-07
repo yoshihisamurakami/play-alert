@@ -10,7 +10,6 @@ $(document).on 'turbolinks:load', ->
     current_scrollY = $(window).scrollTop()
     $("body").css('position', 'fixed')
     get_stageinfo($(this))
-    #window.location.href = $(this).attr('data-choice')
     
   $('#stagelist_area').on 'click', '.star', ->
     if $(this).hasClass('glyphicon-star-empty')
@@ -26,15 +25,16 @@ $(document).on 'turbolinks:load', ->
     $("body").css('position', 'static')
     $(window).scrollTop(current_scrollY)
     
-  $('#usermenu_dropdown').on 'click', ->
-    if $('#user_menu').css('display') == 'none'
-      $('#user_menu').css('display', 'block')
-    else
-      $('#user_menu').css('display', 'none')
-  $(document).on 'click', ->
-    if (!$(event.target).closest('#usermenu_dropdown').length) and (!$(event.target).closest('#user_menu').length)
-      if $('#user_menu').css('display') == 'block'
-        $('#user_menu').css('display', 'none')
+  # $('#usermenu_dropdown').on 'click', ->
+  #   if $('#user_menu').css('display') == 'none'
+  #     $('#user_menu').css('display', 'block')
+  #   else
+  #     $('#user_menu').css('display', 'none')
+      
+  # $(document).on 'click', ->
+  #   if (!$(event.target).closest('#usermenu_dropdown').length) and (!$(event.target).closest('#user_menu').length)
+  #     if $('#user_menu').css('display') == 'block'
+  #       $('#user_menu').css('display', 'none')
         
   $('.stagenavi-later').on 'click', ->
     if $('.later-list').css('display') == 'none'
@@ -69,84 +69,139 @@ $(window).bind("scroll", ->
   obj = $(this)
 
   if ((scrollHeight - scrollPosition) / scrollHeight <= 0.05)
-    scrolled_to_bottom(obj)
+    scrolled_to_bottom()
   if $(this).scrollTop() > 160
    $(".pagetop").fadeIn()
   if $(this).scrollTop() <= 160
    $(".pagetop").fadeOut()
 )
 
-scrolled_to_bottom = (obj) ->
+scrolled_to_bottom = ->
   if $('#loading').html() == ''
     loading_page()
 
+class loading
+  @LOADING_END_MARK = '●'
+  
+  @loading: () ->
+    $('#loading').html('<img src="/img/loading.gif">')
+    
+  @end: () ->
+    $('#loading').html(this.LOADING_END_MARK)
+    
+  @clear: () ->
+    $('#loading').html('')
+
+class stages_list
+  constructor: (@param) ->
+    @stages = @param
+    
+  size: () ->
+    @stages.length
+
+  json_to_html: (@page) ->
+    for i in [0..@stages.length-1]
+      _append_startdate_label.call @, @stages[i]
+      _append_stage_info.call @, @stages[i]
+      
+    $('#pages').val(@page)
+    if @stages.size < 20
+      loading.end()
+      return false
+    loading.clear()
+
+  _append_startdate_label = (stage) ->
+    lastdate = $('.stagelist-title:last').attr('data-startdate')
+    if lastdate != stage.startdate
+      html = _startdate_label_html.call @, stage
+      $('#stagelist_area').append(html)
+      
+  _append_stage_info = (stage) ->
+    if $('div[stage-id="' + stage.id + '"]').length == 0
+      html = _stage_html.call @, stage
+      $('#stagelist_area').append(html)
+    
+  _startdate_title_class = () ->
+    if location.href.match(/playing/)
+      'nowplaying'
+    else if location.href.match(/later/)
+      'later'
+    else
+      ''
+
+  _startdate_label_html = (stage) ->
+    title_class = _startdate_title_class.call @
+    html = '<div class="stagelist-title ' + title_class + '" data-startdate="' + stage.startdate + '">'
+    html = html + stage.startdatej + '<span class="stagelist-tilde">〜</span></div>'
+    html
+
+  _stage_html = (stage) ->
+    html = '<div class="stage-choice" data-choice="' + stage.url + '" stage-id="' + stage.id + '">'
+    html = html + '<span class="stage-title">' + stage.title + '</span>&nbsp;&nbsp;'
+    html = html + '<span class="stage-group">' + stage.group + '</span><br>'
+    html = html + '<span class="stage-detail">'
+    html = html + '<span class="stage-term">' + stage.term + '</span><br>'
+    html = html + '<span class="stage-theater">' + stage.theater + '</span>&nbsp;&nbsp;'
+    html = html + '</span>'
+    html = html + '<a class="glyphicon icon-link star ' + stage.glyphicon_star + '" href=""></a>'
+    html = html + '</div>'
+    html
+    
 loading_page = ->
-  $('#loading').html('<img src="/img/loading.gif">')
+  loading.loading()
   page = get_pageno()
   reading_json(page)
   $('#page_readed').html(page)
-  #history.replaceState('state', '', '#' + page)
-
-loading_page_on_historyback = (tmp_page) ->
-  $('#loading').html('<img src="/img/loading.gif">')
-  for page in [2..tmp_page]
-    reading_json(page)
-    $('#page_readed').html(page)
-
+  
 reading_json = (page) ->
-  LOADING_END_MARK = '●'
-  if window.location.search != ''
-    json_url = window.location.search + "&type=json&page=" + page
+  if m = location.pathname.match(/\/stages\/(playing|thisweek)/)
+    json_url = "/stages/json/" + m[1] + "?page=" + page
+  else if location.pathname.match(/\/stages\/later/)
+    if m = location.search.match(/\?start=(\d{8})/)
+      json_url = "/stages/json/later?start=" + m[1] + "&page=" + page
+    else
+      return false
   else
-    json_url = "?type=json&page=" + page
+    console.log("not match " + location.pathname)
+    return false
 
   $.getJSON(json_url, (data) ->
-    if data.length == 0
-      $('#loading').html(LOADING_END_MARK)
+    stages = new stages_list(data)
+    if stages.size() == 0
+      loading.end()
       return false
-    for i in [0..data.length-1]
-      lastdate = $('.stagelist-title:last').attr('data-startdate')
-      if lastdate != data[i].startdate
-        html = get_stagelist_title(data,i)
-        $('#stagelist_area').append(html)
-      if $('div[stage-id="' + data[i].id + '"]').length == 0
-        $('#stagelist_area').append(get_stage_html(data,i,page))
-    $('#pages').val(page)
-    if data.length < 20
-      $('#loading').html(LOADING_END_MARK)
-      return false
-    $('#loading').html('')
+    stages.json_to_html(page)
   )
-
+  
 get_pageno = ->
   if $('#pages').val() == ''
     return 2
   else
     return parseInt($('#pages').val()) + parseInt(1)
 
-get_stage_html = (data,i,page) ->
-  html = '<div class="stage-choice" data-choice="' + data[i].url + '" stage-id="' + data[i].id + '">'
-  html = html + '<span class="stage-title">'+data[i].title+'</span>&nbsp;&nbsp;'
-  html = html + '<span class="stage-group">'+data[i].group+'</span><br>'
-  html = html + '<span class="stage-detail">'
-  html = html + '<span class="stage-term">' + data[i].term + '</span><br>'
-  html = html + '<span class="stage-theater">' + data[i].theater + '</span>&nbsp;&nbsp;'
-  html = html + '</span>'
-  html = html + '<a class="glyphicon icon-link star ' + data[i].glyphicon_star + '" href=""></a>'
-  # html = html + '#' + page + '#' + i + '#'
-  html = html + '</div>'
-  return html
+# get_stage_html = (data,i,page) ->
+#   html = '<div class="stage-choice" data-choice="' + data[i].url + '" stage-id="' + data[i].id + '">'
+#   html = html + '<span class="stage-title">'+data[i].title+'</span>&nbsp;&nbsp;'
+#   html = html + '<span class="stage-group">'+data[i].group+'</span><br>'
+#   html = html + '<span class="stage-detail">'
+#   html = html + '<span class="stage-term">' + data[i].term + '</span><br>'
+#   html = html + '<span class="stage-theater">' + data[i].theater + '</span>&nbsp;&nbsp;'
+#   html = html + '</span>'
+#   html = html + '<a class="glyphicon icon-link star ' + data[i].glyphicon_star + '" href=""></a>'
+#   # html = html + '#' + page + '#' + i + '#'
+#   html = html + '</div>'
+#   return html
 
-get_stagelist_title = (data,i) ->
-  title_class = ''
-  if location.href.match(/playing/)
-    title_class = ' nowplaying'
-  else if location.href.match(/later/)
-    title_class = ' later'
-  html = '<div class="stagelist-title' + title_class + '" data-startdate="' + data[i].startdate + '">'
-  html = html + data[i].startdatej
-  html = html + '<span class="stagelist-tilde">〜</span>'
-  html = html + '</div>'
+# get_stagelist_title = (data,i) ->
+#   title_class = ''
+#   if location.href.match(/playing/)
+#     title_class = ' nowplaying'
+#   else if location.href.match(/later/)
+#     title_class = ' later'
+#   html = '<div class="stagelist-title' + title_class + '" data-startdate="' + data[i].startdate + '">'
+#   html = html + data[i].startdatej
+#   html = html + '<span class="stagelist-tilde">〜</span>'
+#   html = html + '</div>'
 
 get_stageinfo = (obj) ->
   title = obj.children('.stage-title').html()

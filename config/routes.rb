@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
   root 'stages#thisweek'
   
-  get 'stages/playing', to: 'stages#playing'
+  get 'stages/playing',  to: 'stages#playing'
   get 'stages/thisweek', to: 'stages#thisweek'
-  get 'stages/later', to: 'stages#later'
+  get 'stages/later',    to: 'stages#later'
   get 'stages/detail/:id', to: 'stages#detail'
-  
   resources :stages, only: [:show]
+  
+  get 'stages/json/playing',  to: 'stages_json#playing'
+  get 'stages/json/thisweek', to: 'stages_json#thisweek'
+  get 'stages/json/later',    to: 'stages_json#later'
+  
   post 'alerts/create', to: 'alerts#create'
   get 'help', to: 'static_pages#help'
   get 'calendar', to: 'calendar#index'
