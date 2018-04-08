@@ -1,26 +1,28 @@
-
 class StagesJsonController < StagesController
-
+  before_action :set_page
+  
   def playing
-    page = params[:page] ? params[:page] : 1
-    @stages = Stage.playing page
+
+    @stages = Stage.playing @page
     render json: stages_json
   end
   
   def thisweek
-    page = params[:page] ? params[:page] : 1
-    @stages = Stage.thisweek page
+    @stages = Stage.thisweek @page
     render json: stages_json
   end
   
   def later
-    page = params[:page] ? params[:page] : 1
     start = params[:start] ? params[:start] : ''
-    @stages = Stage.later(page, start)
+    @stages = Stage.later(@page, start)
     render json: stages_json
   end
   
   private
+  
+  def set_page
+    @page = params[:page] ? params[:page] : 1
+  end
   
   def stages_json
     @stages.inject([]) do |json, stage|

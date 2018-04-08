@@ -77,9 +77,14 @@ $(window).bind("scroll", ->
 )
 
 scrolled_to_bottom = ->
-  if $('#loading').html() == ''
-    loading_page()
+  if $('#loading').html() != ''
+    return
 
+  loading.loading()
+  res = append_nextpage()
+  if res == false
+    loading.error()
+    
 class loading
   @LOADING_END_MARK = '●'
   
@@ -92,6 +97,22 @@ class loading
   @clear: () ->
     $('#loading').html('')
 
+  @error: () ->
+    $('#loading').html('エラーが発生しました')
+
+class pages
+  @get: () ->
+    if $('#pages').val() == ''
+      1
+    else
+      parseInt($('#pages').val())
+
+  @get_next: () ->
+    this.get() + parseInt(1)
+    
+  @set: (page) ->
+    $('#pages').val(page)
+
 class stages_list
   constructor: (@param) ->
     @stages = @param
@@ -100,14 +121,19 @@ class stages_list
     @stages.length
 
   json_to_html: (@page) ->
+    if @stages.size() == 0
+      loading.end()
+      return false
     for i in [0..@stages.length-1]
       _append_startdate_label.call @, @stages[i]
       _append_stage_info.call @, @stages[i]
       
-    $('#pages').val(@page)
+    pages.set(@page)
+    
     if @stages.size < 20
       loading.end()
       return false
+      
     loading.clear()
 
   _append_startdate_label = (stage) ->
@@ -131,77 +157,49 @@ class stages_list
 
   _startdate_label_html = (stage) ->
     title_class = _startdate_title_class.call @
-    html = '<div class="stagelist-title ' + title_class + '" data-startdate="' + stage.startdate + '">'
-    html = html + stage.startdatej + '<span class="stagelist-tilde">〜</span></div>'
-    html
+    """
+<div class="stagelist-title #{title_class}" data-startdate="#{stage.startdate}">
+  #{stage.startdatej} <span class="stagelist-tilde">〜</span>
+</div>
+    """
 
   _stage_html = (stage) ->
-    html = '<div class="stage-choice" data-choice="' + stage.url + '" stage-id="' + stage.id + '">'
-    html = html + '<span class="stage-title">' + stage.title + '</span>&nbsp;&nbsp;'
-    html = html + '<span class="stage-group">' + stage.group + '</span><br>'
-    html = html + '<span class="stage-detail">'
-    html = html + '<span class="stage-term">' + stage.term + '</span><br>'
-    html = html + '<span class="stage-theater">' + stage.theater + '</span>&nbsp;&nbsp;'
-    html = html + '</span>'
-    html = html + '<a class="glyphicon icon-link star ' + stage.glyphicon_star + '" href=""></a>'
-    html = html + '</div>'
-    html
-    
-loading_page = ->
-  loading.loading()
-  page = get_pageno()
-  reading_json(page)
-  $('#page_readed').html(page)
-  
-reading_json = (page) ->
-  if m = location.pathname.match(/\/stages\/(playing|thisweek)/)
-    json_url = "/stages/json/" + m[1] + "?page=" + page
-  else if location.pathname.match(/\/stages\/later/)
-    if m = location.search.match(/\?start=(\d{8})/)
-      json_url = "/stages/json/later?start=" + m[1] + "&page=" + page
-    else
-      return false
-  else
-    console.log("not match " + location.pathname)
-    return false
+    """
+<div class="stage-choice" data-choice=#{stage.url}" stage-id="#{stage.id}">
+  <span class="stage-title">#{stage.title}</span>&nbsp;&nbsp;
+  <span class="stage-group">#{stage.group}</span><br>
+  <span class="stage-detail">
+    <span class="stage-term">#{stage.term}</span><br>
+    <span class="stage-theater">#{stage.theater}</span>&nbsp;&nbsp;
+  </span>
+  <a class="glyphicon icon-link star #{stage.glyphicon_star}"></a>
+</div>
+    """
 
+append_nextpage = ->
+  page = pages.get_next()
+  json_url = get_json_url(page)
+  if json_url == false
+    false
+  
   $.getJSON(json_url, (data) ->
     stages = new stages_list(data)
-    if stages.size() == 0
-      loading.end()
-      return false
     stages.json_to_html(page)
   )
-  
-get_pageno = ->
-  if $('#pages').val() == ''
-    return 2
+
+get_json_url = (page) ->
+  if m = location.pathname.match(/\/stages\/(playing|thisweek)/)
+    "/stages/json/" + m[1] + "?page=" + page
+  else if location.pathname.match(/\/stages\/later/)
+    if m = location.search.match(/\?start=(\d{8})/)
+      "/stages/json/later?start=" + m[1] + "&page=" + page
+    else
+      false
+  else if location.pathname == '/'
+    "/stages/json/thisweek?page=" + page
   else
-    return parseInt($('#pages').val()) + parseInt(1)
-
-# get_stage_html = (data,i,page) ->
-#   html = '<div class="stage-choice" data-choice="' + data[i].url + '" stage-id="' + data[i].id + '">'
-#   html = html + '<span class="stage-title">'+data[i].title+'</span>&nbsp;&nbsp;'
-#   html = html + '<span class="stage-group">'+data[i].group+'</span><br>'
-#   html = html + '<span class="stage-detail">'
-#   html = html + '<span class="stage-term">' + data[i].term + '</span><br>'
-#   html = html + '<span class="stage-theater">' + data[i].theater + '</span>&nbsp;&nbsp;'
-#   html = html + '</span>'
-#   html = html + '<a class="glyphicon icon-link star ' + data[i].glyphicon_star + '" href=""></a>'
-#   # html = html + '#' + page + '#' + i + '#'
-#   html = html + '</div>'
-#   return html
-
-# get_stagelist_title = (data,i) ->
-#   title_class = ''
-#   if location.href.match(/playing/)
-#     title_class = ' nowplaying'
-#   else if location.href.match(/later/)
-#     title_class = ' later'
-#   html = '<div class="stagelist-title' + title_class + '" data-startdate="' + data[i].startdate + '">'
-#   html = html + data[i].startdatej
-#   html = html + '<span class="stagelist-tilde">〜</span>'
-#   html = html + '</div>'
+    console.log("not match " + location.pathname)
+    false
 
 get_stageinfo = (obj) ->
   title = obj.children('.stage-title').html()
@@ -239,13 +237,13 @@ get_stageinfo = (obj) ->
   )
 
 get_stagedetail_html = (title, str) ->
-  return """
+  """
 <div class="detail-title">#{title}</div>
 <div class="detail-content">#{str}</div>
 """
 
 get_stagedetail_link_html = (title, str) ->
-  return """
+  """
 <div class="detail-title">#{title}</div>
 <div class="detail-content"><a href="#{str}" target="_blank">#{str}</a></div>
 """

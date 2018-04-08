@@ -1,14 +1,6 @@
 class StagesController < ApplicationController
   include StagesHelper
-  before_action :set_stages_on_weeks
-  
-  def index
-    today = Date.today
-    @stages = Stage
-      .where("startdate > ?", today)
-      .order(:startdate, :id)
-      .page(params[:page])
-  end
+  before_action :set_stages_on_weeks, only: [:playing, :thisweek, :later]
   
   def show
     @stage = Stage.find(params[:id])
@@ -25,25 +17,13 @@ class StagesController < ApplicationController
   end
   
   def playing
-    #@stages = Stage
-    #  .where("startdate <= ?", Date.today)
-    #  .order(:startdate, :id)
-    #  .page(params[:page])
-    #return render json: stages_json if params[:type] == 'json'
     @stages = Stage.playing
     @view = 'playing'
     render :index
   end
   
   def thisweek
-    first = firstofweek(Date.today)
-    last  = lastofweek(Date.today)
-    @stages = Stage
-      .where("startdate >= ?", first)
-      .where("startdate <= ?", last)
-      .order(:startdate, :id)
-      .page(params[:page])
-    return render json: stages_json if params[:type] == 'json'
+    @stages = Stage.thisweek
     @view = 'thisweek'
     render :index
   end
@@ -56,15 +36,9 @@ class StagesController < ApplicationController
         .order(:startdate, :id)
         .page(params[:page])
     else
-      start = DateTime.strptime(params[:start], "%Y%m%d")
-      @stages = Stage
-        .where("startdate >= ?", start)
-        .where("startdate <= ?", start + 6)
-        .order(:startdate, :id)
-        .page(params[:page])
+      @stages = Stage.later(1, params[:start])
     end
     
-    return render json: stages_json if params[:type] == 'json'
     @view = 'later'
     render :index
   end
@@ -86,19 +60,4 @@ class StagesController < ApplicationController
     end
   end
 
-  def stages_json
-    @stages.inject([]) do |json, stage|
-      json.push(stage_json stage)
-    end
-  end
-
-  def stage_json(stage)
-    hash = stage.attributes.symbolize_keys.slice(:id, :title, :group, :startdate, :theater)
-    hash.merge({
-      url: stage_path(stage.id),
-      startdatej: datejapan(stage.startdate),
-      term: stage.term,
-      glyphicon_star: glyphicon_star(stage.id),
-    })
-  end
 end
