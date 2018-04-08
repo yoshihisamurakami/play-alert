@@ -121,7 +121,7 @@ class stages_list
     @stages.length
 
   json_to_html: (@page) ->
-    if @stages.size() == 0
+    if this.size() == 0
       loading.end()
       return false
     for i in [0..@stages.length-1]
@@ -130,7 +130,7 @@ class stages_list
       
     pages.set(@page)
     
-    if @stages.size < 20
+    if this.size < 20
       loading.end()
       return false
       
