@@ -4,6 +4,13 @@
 
 <div id="calendar"></div>
 
+<div style="margin-top: 1em;"></div>
+<% if @stages.count > 0 %>
+  <h3><span style="color:#ffc700;">★</span>マークつき公演一覧</h3>
+  
+  <%= render "stages/stagelist_area" %>
+<% end %>
+
 <% if !logged_in? %>
 <div class="tips">
   ☆マークの情報はブラウザを閉じると消えてしまいます。　<br>

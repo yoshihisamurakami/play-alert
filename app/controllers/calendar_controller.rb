@@ -2,8 +2,8 @@ class CalendarController < ApplicationController
   def index
     @debug = ''
     @datas = []
-    stages = Stage.where(id: stars)
-    stages.each do |stage|
+    @stages = Stage.where(id: stars)
+    @stages.each do |stage|
       @datas += [
         'title' => stage.group + " " + stage.title,
         'start' => stage.startdate.to_s + " 00:00:00",

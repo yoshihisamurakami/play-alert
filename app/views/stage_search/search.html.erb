@@ -9,7 +9,7 @@
 <div id="stagelist_area">
   <div class="stagelist-title">検索結果&nbsp;（<%= @stages.count %>件）</div>
   <% @stages.each do |stage| %>
-    <%= render 'stages/stage', stage: stage %>
+    <%= render 'shared/stage', stage: stage %>
   <% end %>
 </div>
 <% end %>

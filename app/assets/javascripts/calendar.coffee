@@ -6,5 +6,5 @@ $(document).on 'turbolinks:load', ->
     $('#calendar').fullCalendar(
       events:window.datas,
       lang: 'ja',
-      height: window.innerHeight - 80,
+      height: window.innerHeight - 110,
     )

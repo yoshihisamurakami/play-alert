@@ -1,0 +1,18 @@
+<div id="stagelist_area">
+<% keydate = '' %>
+<% @stages.each do |stage| %>
+<%   if keydate != stage.startdate %>
+    <div class="stagelist-title <%= stagelist_title_class %>" data-startdate="<%= stage.startdate %>">
+      <%= datejapan(stage.startdate) %><span class="stagelist-tilde">〜</span>
+    </div>
+    <% keydate = stage.startdate %>
+<%   end %>
+    <%= render 'shared/stage', stage: stage %>
+<% end %>
+</div>
+
+<a href="" class="pagetop"><span class="glyphicon glyphicon-chevron-up"></span></a>
+<div id="loading"></div>
+<form><input type="text" id="pages" value="" style="display: none"></form>
+
+<%= render 'shared/popup' %>

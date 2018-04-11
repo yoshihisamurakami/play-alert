@@ -69,7 +69,8 @@ $(window).bind("scroll", ->
   obj = $(this)
 
   if ((scrollHeight - scrollPosition) / scrollHeight <= 0.05)
-    scrolled_to_bottom()
+    if location.pathname != '/calendar'
+      scrolled_to_bottom()
   if $(this).scrollTop() > 160
    $(".pagetop").fadeIn()
   if $(this).scrollTop() <= 160
@@ -180,7 +181,7 @@ append_nextpage = ->
   page = pages.get_next()
   json_url = get_json_url(page)
   if json_url == false
-    false
+    return false
   
   $.getJSON(json_url, (data) ->
     stages = new stages_list(data)
