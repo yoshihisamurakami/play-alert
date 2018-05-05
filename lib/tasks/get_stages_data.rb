@@ -43,7 +43,7 @@ class Tasks::GetStagesData
           stage.destroy
         end
       end
-      StageMailer.getstages_message(message).deliver_now
+      #StageMailer.getstages_message(message).deliver_now
     end
     
     # 公演最終日が前日より前の舞台情報は削除

@@ -14,13 +14,13 @@ module GetStageDetailsHelper
   
   def get_stage_details
     puts "get_stage_details helper start!!"
-
+    msg = ''
     stages = Stage.all
     count=0
     stages.each do |stage|
       next unless need_update?(stage.id)
       puts stage.id.to_s + " " + stage.title + " " + stage.url
-      #puts "details update!"
+      msg += stage.id.to_s + " " + stage.title + " " + stage.url + "\r\n"
 
       html = get_html(CORICH_URL_DOMAIN + stage.url)
       next if !html
@@ -28,10 +28,11 @@ module GetStageDetailsHelper
       detail = get_detailinfo(html[:html], html[:charset])
       save_detail(stage.id, detail)
       count += 1
-      
+      break if count >= 100
       sleep 2
     end
-    puts "更新件数 => " + count.to_s
+    msg += "更新件数 => " + count.to_s + "\r\n"
+    StageMailer.getstages_message(msg).deliver_now
     return
   end
 
