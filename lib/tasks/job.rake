@@ -8,6 +8,10 @@ namespace :job do
     GetStageBeginningsJob.perform_now
   end
   
+  task getStageNewArrivals: :environment do
+    GetStageNewArrivalsJob.perform_now
+  end
+  
   task getStageDetails: :environment do
     GetStageDetailsJob.perform_now
   end

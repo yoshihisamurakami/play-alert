@@ -32,7 +32,9 @@ module GetStageDetailsHelper
       sleep 2
     end
     msg += "更新件数 => " + count.to_s + "\r\n"
-    StageMailer.getstages_message(msg).deliver_now
+    if count > 0
+      StageMailer.getstages_message(msg).deliver_now
+    end
     return
   end
 
