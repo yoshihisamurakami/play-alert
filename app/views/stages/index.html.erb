@@ -19,7 +19,24 @@
     来週以降〜&nbsp;<span class="glyphicon glyphicon-chevron-down" style="font-size: 0.8em"></span>
 <% end %>
 
-<ul class="later-list">
+<ul class="later-list" id="later-list-1">
+<% latermax = 5 %>
+<% count = 0    %>
+<% @stages_on_weeks.each do |stage_on_week| %>
+    <li>
+        <%= link_to stage_on_week[:firstday].strftime('%Y-%m-%d') + "〜" + 
+            (stage_on_week[:firstday] + 6).strftime('%Y-%m-%d') + " (" + stage_on_week[:size].to_s + "件)",
+            "/stages/later?start=" + stage_on_week[:firstday].strftime('%Y%m%d') %>
+        <% count+=1 %>
+        <% break if count > latermax %>
+    </li>
+<% end %>
+<% if @stages_on_weeks.count > count %>
+    <li><a href="" id="later-list-more">もっとみる..</a></li>
+<% end %>
+</ul>
+
+<ul class="later-list" id="later-list-2">
 <% @stages_on_weeks.each do |stage_on_week| %>
     <li>
         <%= link_to stage_on_week[:firstday].strftime('%Y-%m-%d') + "〜" + 
@@ -28,5 +45,4 @@
     </li>
 <% end %>
 </ul>
-
 <%= render 'stagelist_area' %>

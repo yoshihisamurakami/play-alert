@@ -35,13 +35,24 @@ $(document).on 'turbolinks:load', ->
   #   if (!$(event.target).closest('#usermenu_dropdown').length) and (!$(event.target).closest('#user_menu').length)
   #     if $('#user_menu').css('display') == 'block'
   #       $('#user_menu').css('display', 'none')
-        
+  
+  $(document).on 'click', ->
+    if $('#later-list-1').css('display') == 'block'
+      $('#later-list-1').css('display', 'none')
+    if $('#later-list-2').css('display') == 'block'
+      $('#later-list-2').css('display', 'none')
   $('.stagenavi-later').on 'click', ->
-    if $('.later-list').css('display') == 'none'
-      $('.later-list').css('display', 'block')
+    if $('#later-list-1').css('display') == 'none' and $('#later-list-2').css('display') == 'none' 
+      $('#later-list-1').css('display', 'block')
     else
-      $('.later-list').css('display', 'none')
+      $('#later-list-1').css('display', 'none')
+      $('#later-list-2').css('display', 'none')
     return false
+  $('#later-list-more').on 'click', ->
+    $('#later-list-1').css('display', 'none')
+    $('#later-list-2').css('display', 'block')
+    return false
+    
   $('.pagetop').on 'click', ->
     $('body,html').animate({
       scrollTop: 0}

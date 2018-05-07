@@ -11,6 +11,7 @@ module GetStageDetailsHelper
       timetable: "タイムテーブル",
   }
   CORICH_URL_DOMAIN = "http://stage.corich.jp"
+  NOT_FOUND = "404"
   
   def get_stage_details
     puts "get_stage_details helper start!!"
@@ -23,7 +24,11 @@ module GetStageDetailsHelper
       msg += stage.id.to_s + " " + stage.title + " " + stage.url + "\r\n"
 
       html = get_html(CORICH_URL_DOMAIN + stage.url)
-      next if !html
+      if html[:status] == NOT_FOUND
+        puts "stage-page not found."
+        stage.destroy
+      end
+      next if !html[:html]
       
       detail = get_detailinfo(html[:html], html[:charset])
       save_detail(stage.id, detail)
@@ -31,6 +36,7 @@ module GetStageDetailsHelper
       break if count >= 100
       sleep 2
     end
+    puts "更新件数 => " + count.to_s + "\r\n"
     msg += "更新件数 => " + count.to_s + "\r\n"
     if count > 0
       StageMailer.getstages_message(msg).deliver_now
@@ -45,10 +51,22 @@ module GetStageDetailsHelper
         charset = (f.class == 'Tempfile') ? f.charset : DEFAULT_CHARSET
         f.read
       end
-    rescue
-      return false
+    rescue => e
+      puts e.to_s
+      return {status: NOT_FOUND} if e.to_s.match(/Not Found/)
+      return nil
     end
     {html: html, charset: charset} 
+  end
+  
+  def get_status(url)
+    begin
+      open(url) do |f|
+        f.status[0]
+      end
+    rescue => e
+      puts e
+    end
   end
   
   def nokogiri_parse(html, charset)
@@ -86,6 +104,8 @@ module GetStageDetailsHelper
   def need_update?(stage_id)
     detail = StageDetail.find_by(stage_id: stage_id)
     return true if detail.nil?
+    return true if detail.cast.nil?  #暫定
+    
     # (3日以内にレコードが更新されていたらfalseを返す)
     return false if detail.updated_at > 3.days.ago
     true
