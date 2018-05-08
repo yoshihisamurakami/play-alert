@@ -104,7 +104,6 @@ module GetStageDetailsHelper
   def need_update?(stage_id)
     detail = StageDetail.find_by(stage_id: stage_id)
     return true if detail.nil?
-    return true if detail.cast.nil?  #暫定
     
     # (3日以内にレコードが更新されていたらfalseを返す)
     return false if detail.updated_at > 3.days.ago
