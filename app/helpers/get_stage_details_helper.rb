@@ -38,9 +38,9 @@ module GetStageDetailsHelper
     end
     puts "更新件数 => " + count.to_s + "\r\n"
     msg += "更新件数 => " + count.to_s + "\r\n"
-    if count > 0
-      StageMailer.getstages_message(msg).deliver_now
-    end
+    #if count > 0
+    #  StageMailer.getstages_message(msg).deliver_now
+    #end
     return
   end
 
