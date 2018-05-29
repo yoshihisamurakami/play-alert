@@ -52,10 +52,10 @@ module GetStageDetailsHelper
         f.read
       end
     rescue => e
-      msg = "エラークラス -> " + e.class + "\r\n"
-      msg += "エラーメッセージ -> " + e.message + "\r\n"
+      msg = "エラークラス -> #{e.class}\r\n"
+      msg += "エラーメッセージ -> #{e.message}\r\n"
       msg += "バックトレース -> \r\n"
-      msg += e.backtrace
+      msg += "#{e.backtrace}"
       StageMailer.getstages_message(msg).deliver_now
       
       return {status: NOT_FOUND} if e.to_s.match(/Not Found/)
