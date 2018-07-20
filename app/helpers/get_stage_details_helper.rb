@@ -34,7 +34,6 @@ module GetStageDetailsHelper
     end
 
     if @update_count < 100
-      #stage_detailsテーブルで
       stages = Stage.includes(:stage_detail)
         .where("stage_details.updated_at < ?", 3.days.ago)
         .references(:stage_detail)
@@ -51,7 +50,7 @@ module GetStageDetailsHelper
     if (@new_rec + @updated > 0) 
       msg = "新規 : #{@new_rec}  更新 : #{@updated}"
       p msg
-      StageMailer.getstages_message(msg).deliver_now
+      #StageMailer.getstages_message(msg).deliver_now
     end
   end
 
