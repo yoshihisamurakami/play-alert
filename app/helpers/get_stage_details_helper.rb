@@ -32,19 +32,20 @@ module GetStageDetailsHelper
         break if @update_count >= 100
       end
     end
-
-    if @update_count < 100
-      stages = Stage.includes(:stage_detail)
-        .where("stage_details.updated_at < ?", 3.days.ago)
-        .references(:stage_detail)
-      stages.each do |stage|
-        if update_detail stage
-          @updated += 1
-          @update_count += 1
-          break if @update_count >= 100
-        end
-      end
-    end
+    
+    # 一時的に既存データの更新を停止 (2018-09-07) 
+    #if @update_count < 100
+    #  stages = Stage.includes(:stage_detail)
+    #    .where("stage_details.updated_at < ?", 3.days.ago)
+    #    .references(:stage_detail)
+    #  stages.each do |stage|
+    #    if update_detail stage
+    #      @updated += 1
+    #      @update_count += 1
+    #      break if @update_count >= 100
+    #    end
+    #  end
+    #end
     
     puts "更新件数 => " + @update_count.to_s + "\r\n"
     if (@new_rec + @updated > 0) 
