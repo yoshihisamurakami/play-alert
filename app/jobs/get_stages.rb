@@ -1,8 +1,8 @@
 
 class GetStages
   
-  STAGES_URL = 'http://stage.corich.jp/stage/'.freeze
-  STAGES_DOMAIN = 'http://stage.corich.jp'.freeze
+  STAGES_URL = 'https://stage.corich.jp/stage/'.freeze
+  STAGES_DOMAIN = 'https://stage.corich.jp'.freeze
   TIMEOUT = 10.freeze
   SLEEPTIME = 2.freeze
   STAGES_COUNT_ON_ONE_PAGE = 20.freeze
