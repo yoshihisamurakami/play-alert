@@ -5,11 +5,11 @@
 $(document).on 'turbolinks:load', ->
   current_scrollY = 0
   $('#stagelist_area').on 'click', '.stage-choice', ->
-    $('#popup').css('display', 'block')
-    $("body").css('overflow', 'hidden')
-    current_scrollY = $(window).scrollTop()
-    $("body").css('position', 'fixed')
-    get_stageinfo($(this))
+    current_scrollY = PopupModal.display()
+    PopupModal.assignStageInfo($(this))
+    
+  $('.popup-close').on 'click', ->
+    PopupModal.hide(current_scrollY)
     
   $('#stagelist_area').on 'click', '.star', ->
     if $(this).hasClass('glyphicon-star-empty')
@@ -18,24 +18,6 @@ $(document).on 'turbolinks:load', ->
       star_to_empty($(this))
     return false
     
-  $('.popup-close').on 'click', ->
-    $('#popup').css('display', 'none')
-    $('#popup-detail').html('')
-    $("body").css('overflow', 'auto')
-    $("body").css('position', 'static')
-    $(window).scrollTop(current_scrollY)
-    
-  # $('#usermenu_dropdown').on 'click', ->
-  #   if $('#user_menu').css('display') == 'none'
-  #     $('#user_menu').css('display', 'block')
-  #   else
-  #     $('#user_menu').css('display', 'none')
-      
-  # $(document).on 'click', ->
-  #   if (!$(event.target).closest('#usermenu_dropdown').length) and (!$(event.target).closest('#user_menu').length)
-  #     if $('#user_menu').css('display') == 'block'
-  #       $('#user_menu').css('display', 'none')
-  
   $(document).on 'click', ->
     if $('#later-list-1').css('display') == 'block'
       $('#later-list-1').css('display', 'none')
@@ -213,49 +195,79 @@ get_json_url = (page) ->
     console.log("not match " + location.pathname)
     false
 
-get_stageinfo = (obj) ->
-  title = obj.children('.stage-title').html()
-  group = obj.children('.stage-group').html()
-  term  = obj.children('.stage-detail').children('.stage-term').html()
-  theater = obj.children('.stage-detail').children('.stage-theater').html()
-  $('#popup-title').html(title)
-  $('#popup-group').html(group)
-  $('#popup-term').html(term)
-  $('#popup-theater').html(theater)
-  $('#popup-detail').html('<div style="text-align: center; margin-top:3em;"><img src="/img/loading.gif"></div>')
-  $('.popup-bottom').css('display', 'none')
-  
-  $.getJSON('/stages/detail/' + obj.attr('stage-id'), (data) ->
-    $('#popup-detail').html('')
-    if data.status == "notfound"
-      $('.popup-bottom').css('display', 'block')
-      return
+class PopupModal
+  _loadingHtml = '<div style="text-align: center; margin-top:3em;"><img src="/img/loading.gif"></div>'
 
+  @display: ->
+    $('#popup').css('display', 'block')
+    $("body").css('overflow', 'hidden')
+    position_y = $(window).scrollTop()
+    $("body").css('position', 'fixed')
+    return position_y
+    
+  @hide: (position_y)->
+    $('#popup').css('display', 'none')
+    $('#popup-detail').html('')
+    $("body").css('overflow', 'auto')
+    $("body").css('position', 'static')
+    $(window).scrollTop(position_y)
+  
+  @assignStageInfo: (obj) ->
+    _assignMainInfo(obj)
+    _detailToLoading()
+    _hideBottomArea()
+    $.getJSON('/stages/detail/' + obj.attr('stage-id'), (data) ->
+      $('#popup-detail').html('')
+      if data.status == "notfound"
+        _displayBottomArea()
+        return
+      _assignDetailInfo(data)
+      _displayBottomArea()
+    )
+    
+  _assignMainInfo = (obj) ->
+    title = obj.children('.stage-title').html()
+    group = obj.children('.stage-group').html()
+    term  = obj.children('.stage-detail').children('.stage-term').html()
+    theater = obj.children('.stage-detail').children('.stage-theater').html()
+    $('#popup-title').html(title)
+    $('#popup-group').html(group)
+    $('#popup-term').html(term)
+    $('#popup-theater').html(theater)
+    
+  _detailToLoading = ->
+    $('#popup-detail').html(_loadingHtml)
+  
+  _hideBottomArea = ->
+    $('.popup-bottom').css('display', 'none')
+    
+  _displayBottomArea = ->
+    $('.popup-bottom').css('display', 'block')
+  
+  _assignDetailInfo = (data) ->
     if data.playwright != ''
-      $('#popup-detail').append( get_stagedetail_html('脚本', data.playwright))
+      $('#popup-detail').append( _get_stagedetail_html('脚本', data.playwright))
     if data.director != ''
-      $('#popup-detail').append( get_stagedetail_html('演出', data.director))
+      $('#popup-detail').append( _get_stagedetail_html('演出', data.director))
     if data.cast != ''
-      $('#popup-detail').append( get_stagedetail_html('出演', data.cast))
+      $('#popup-detail').append( _get_stagedetail_html('出演', data.cast))
     if data.price != ''
-      $('#popup-detail').append( get_stagedetail_html('チケット', data.price))
+      $('#popup-detail').append( _get_stagedetail_html('チケット', data.price))
     if data.timetable != ''
-      $('#popup-detail').append( get_stagedetail_html('タイムテーブル', data.timetable))
+      $('#popup-detail').append( _get_stagedetail_html('タイムテーブル', data.timetable))
     if data.site != ''
-      $('#popup-detail').append( get_stagedetail_link_html('公式サイト', data.site))
+      $('#popup-detail').append( _get_stagedetail_link_html('公式サイト', data.site))
     if $("#popup-stagelink")[0]
       $("#popup-stagelink").attr("href", "/stages/" + obj.attr('stage-id'))
-    $('.popup-bottom').css('display', 'block')
-  )
-
-get_stagedetail_html = (title, str) ->
-  """
+      
+  _get_stagedetail_html = (title, str) ->
+    """
 <div class="detail-title">#{title}</div>
 <div class="detail-content">#{str}</div>
 """
 
-get_stagedetail_link_html = (title, str) ->
-  """
+  _get_stagedetail_link_html = (title, str) ->
+    """
 <div class="detail-title">#{title}</div>
 <div class="detail-content"><a href="#{str}" target="_blank">#{str}</a></div>
 """
