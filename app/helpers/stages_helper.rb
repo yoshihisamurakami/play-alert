@@ -85,7 +85,7 @@ module StagesHelper
   end
   
   def prevweek_link
-    return nil if @view == 'thisweek'
+    return nil if @view == 'thisweek' || @view == 'playing'
     date = Date.today
     thisweek_first = firstofweek(date)
     start = prevweek_first
@@ -97,6 +97,7 @@ module StagesHelper
   end
   
   def nextweek_link
+    return nil if @view == 'playing'
     if params[:start].nil?
       date = Date.today
     else
