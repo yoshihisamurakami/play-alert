@@ -38,7 +38,6 @@ class StagesController < ApplicationController
     else
       @stages = Stage.later(1, params[:start])
     end
-    
     @view = 'later'
     render :index
   end

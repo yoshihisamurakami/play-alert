@@ -73,4 +73,38 @@ module StagesHelper
     lastofweek date
   end
 
+  def lastweek_first(date)
+    date -= 7
+    firstofweek date
+  end
+
+  def prevweek_first
+    firstday = lastweek_first Date.strptime(params[:start], '%Y%m%d')
+    return nil if Stage.count_on_week(firstday) == 0
+    firstday
+  end
+  
+  def prevweek_link
+    return nil if @view == 'thisweek'
+    date = Date.today
+    thisweek_first = firstofweek(date)
+    start = prevweek_first
+    if thisweek_first == start
+      link_to "←前の週", "/stages/thisweek", class: "prevweek-link"
+    else
+      link_to "←前の週", "/stages/later?start=" + start.strftime('%Y%m%d'), class: "prevweek-link"
+    end
+  end
+  
+  def nextweek_link
+    if params[:start].nil?
+      date = Date.today
+    else
+      date = Date.strptime(params[:start], '%Y%m%d')
+    end
+    nextweek_firstday = nextweek_first date
+    return nil if Stage.count_on_week(nextweek_firstday) == 0
+    link_to "次の週→",  "/stages/later?start=" + nextweek_firstday.strftime('%Y%m%d'), class: "nextweek-link"
+  end
+
 end

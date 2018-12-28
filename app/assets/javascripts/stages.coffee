@@ -80,13 +80,14 @@ scrolled_to_bottom = ->
     loading.error()
     
 class loading
-  @LOADING_END_MARK = '●'
+  @LOADING_END_MARK = ' '
   
   @loading: () ->
     $('#loading').html('<img src="/img/loading.gif">')
     
   @end: () ->
     $('#loading').html(this.LOADING_END_MARK)
+    $('.footer-navi').css('display', 'block')
     
   @clear: () ->
     $('#loading').html('')
