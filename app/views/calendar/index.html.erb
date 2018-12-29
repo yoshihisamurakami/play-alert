@@ -1,8 +1,8 @@
 <%= javascript_tag do %>
-  window.datas = <%= raw @datas.to_json %>;
+  window.data = <%= raw @data.to_json %>;
 <% end %>
 
-<div id="calendar"></div>
+<div id="calendar" class="calendar"></div>
 
 <div style="margin-top: 1em;"></div>
 <% if @stages.count > 0 %>

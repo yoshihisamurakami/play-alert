@@ -1,7 +1,14 @@
 $(document).on 'turbolinks:load', ->
   if $('#calendar').html() == ''
     $('#calendar').fullCalendar(
-      events:window.datas,
+      events:window.data,
       lang: 'ja',
-      height: window.innerHeight - 110,
+      height: window.innerHeight - 60,
+      views:
+        month:
+          titleFormat: 'YYYY.MM'
+      header:
+        left: 'prev'
+        center: 'title'
+        right: 'next'
     )

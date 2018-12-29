@@ -591,6 +591,39 @@ input[type=checkbox] {
   margin-top: 3em;
 }
 
+.fc-sun {
+  color: #f80;
+}
+.fc-sat {
+  color: #08f;
+}
+.fc-day-header {
+  background-color: #eee;
+}
+.fc-widget-header {
+  font-weight: normal;
+}
+.fc-center h2 {
+  font-weight: normal;
+  font-size: 1.5em;
+  color: #666;
+}
+
+.fc-state-default {
+  background-image: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+.fc-icon-left-single-arrow:after {
+  color: #ccc;
+}
+.fc-icon-right-single-arrow:after {
+  color: #ccc;
+}
+.calendar {
+  margin-top: 0.5em;
+}
+
 @media screen and (max-width: 767px) {
   body {
     padding: 4em 0;
