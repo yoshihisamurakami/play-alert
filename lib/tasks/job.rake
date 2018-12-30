@@ -19,4 +19,8 @@ namespace :job do
   task keepalive: :environment do
     KeepaliveJob.perform_now
   end
+
+  task getStagesRoughInfo: :environment do
+    GetStagesRoughInfoJob.perform_now
+  end
 end

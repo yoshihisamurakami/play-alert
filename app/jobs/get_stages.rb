@@ -12,6 +12,7 @@ class GetStages
   class << self
     def execute(order = :order_by_startdate)
       page = 1
+      urls = []
       loop do
         if order == :order_by_startdate
           url = stages_url_orderby_startdate page
@@ -26,11 +27,13 @@ class GetStages
         stages.each do |stage|
           next if stage[:enddate].to_date < Date.today
           stage_id = save_or_update stage
+          urls.push stage[:url]
         end
         break if stages.count < STAGES_COUNT_ON_ONE_PAGE
         page += 1
         sleep SLEEPTIME
       end
+      urls
     end
 
     #「初日の古い順」該当ページのURLを返す
@@ -44,7 +47,7 @@ class GetStages
     
     def stages_url_orderby_new_arrivals(page)
       if page == 1
-        STAGES_DOMAIN + '/stage?type=new'
+        STAGES_DOMAIN + '/stage?type=new&area=' + AREA_KANTO
       else
         STAGES_DOMAIN + '/stage?page=%d'% [ page ] + '&sort=create&type=new&area=' + AREA_KANTO
       end
