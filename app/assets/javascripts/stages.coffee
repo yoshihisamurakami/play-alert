@@ -41,6 +41,28 @@ $(document).on 'turbolinks:load', ->
     ,500);
     return false;
     
+  $('.select_area--east').on 'click', ->
+    selectAreaClick('east')
+  
+  $('.select_area--west').on 'click', ->
+    selectAreaClick('west')
+    
+selectAreaClick = (area) ->
+  jqXHR = $.ajax({
+    async: true
+    url: '/area/set'
+    type: 'post'
+    data: { area: area }
+    dataType: 'json'
+    cache: false
+  })
+  jqXHR.done (data, stat, xhr) ->
+    console.log('sucess..')
+    $("[class^='select_area--']").removeClass('select_area--active')
+    $('.select_area--' + area).addClass('select_area--active')
+  jqXHR.fail (xhr, stat, err) ->
+    console.log { fail: stat, error: err, xhr: xhr }
+    
 empty_to_star = (obj)->
   obj.removeClass('glyphicon-star-empty').addClass('glyphicon-star')
   id = obj.parent().attr('stage-id')

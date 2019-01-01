@@ -1,6 +1,7 @@
 class StagesController < ApplicationController
   include StagesHelper
   before_action :set_stages_on_weeks, only: [:playing, :thisweek, :later]
+  before_action :set_area, only: [:playing, :thisweek, :later]
   
   def show
     @stage = Stage.find(params[:id])
@@ -59,4 +60,7 @@ class StagesController < ApplicationController
     end
   end
 
+  def set_area
+    @area = session[:area] || Constants::AREA_KANTO
+  end
 end

@@ -30,5 +30,7 @@ Rails.application.routes.draw do
   post 'contact/confirm', to: 'contacts#confirm'
   post 'contact/sent',    to: 'contacts#sent'
   
+  post 'area/set',        to: 'area#create'
+  
   resources :password_resets, only: [:new, :create, :edit, :update]
 end

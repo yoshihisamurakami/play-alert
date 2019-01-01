@@ -169,6 +169,7 @@ ol {
   padding: 3px;
   margin-top: 8px;
   margin-bottom: 0.1em;
+  padding-left: 0.5em;
 }
 .stagelist-title:first-child {
   margin-top: 10px;
@@ -623,7 +624,19 @@ input[type=checkbox] {
 .calendar {
   margin-top: 0.5em;
 }
+.select_area {
+  height: 2.5em;
+}
+.select_area--east, .select_area--west {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px;
+  cursor : pointer;
+}
 
+.select_area--active {
+  border-bottom: 2px solid red;
+}
 @media screen and (max-width: 767px) {
   body {
     padding: 4em 0;

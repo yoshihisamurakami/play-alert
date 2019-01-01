@@ -1,15 +1,21 @@
 
-<%= render 'shared/header_signup' %>
+<%= # render 'shared/header_signup'
+%>
 
 <%= render 'counter' %>
 
 <%= @debug %>
 
+<!--
 <div class="tips tips-head">
   観たい・気になる公演の☆マークをつけると、その公演のスケジュールがカレンダー（右上のアイコン）に登録されます！ 
   &nbsp;<%= link_to "ヘルプ", help_path %>
 </div>
-
+-->
+<div class="select_area">
+    <span class="select_area--east<%= (@area == Constants::AREA_KANTO ? ' select_area--active': '') %>">関東</span>
+    <span class="select_area--west<%= (@area == Constants::AREA_KINKI ? ' select_area--active': '') %>">関西</span>
+</div>
 <%= link_to "上演中", stages_playing_path, 
     class: 'stagenavi-playing' + stagenavi_onoff('playing') %> 
 <%= link_to "今週〜", stages_thisweek_path,
