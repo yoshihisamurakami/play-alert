@@ -1,20 +1,21 @@
 class StagesJsonController < StagesController
-  before_action :set_page
+  before_action :set_page, :set_area
+  skip_before_action :set_prevweek_link
+  skip_before_action :set_nextweek_link
   
   def playing
-
-    @stages = Stage.playing @page
+    @stages = Stage.playing(@area, @page)
     render json: stages_json
   end
   
   def thisweek
-    @stages = Stage.thisweek @page
+    @stages = Stage.thisweek(@area, @page)
     render json: stages_json
   end
   
   def later
     start = params[:start] ? params[:start] : ''
-    @stages = Stage.later(@page, start)
+    @stages = Stage.later(@area, @page, start)
     render json: stages_json
   end
   
@@ -23,7 +24,7 @@ class StagesJsonController < StagesController
   def set_page
     @page = params[:page] ? params[:page] : 1
   end
-  
+
   def stages_json
     @stages.inject([]) do |json, stage|
       json.push(stage_json stage)

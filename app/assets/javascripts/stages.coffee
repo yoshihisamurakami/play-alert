@@ -1,9 +1,11 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'turbolinks:load', ->
   current_scrollY = 0
+  documentHeight = $(document).height()
+  windowHeight   = $(window).height()
+  if documentHeight <= windowHeight
+    $('.footer-navi').css('display', 'block')
+
   $('#stagelist_area').on 'click', '.stage-choice', ->
     current_scrollY = PopupModal.display()
     PopupModal.assignStageInfo($(this))
@@ -57,9 +59,9 @@ selectAreaClick = (area) ->
     cache: false
   })
   jqXHR.done (data, stat, xhr) ->
-    console.log('sucess..')
     $("[class^='select_area--']").removeClass('select_area--active')
     $('.select_area--' + area).addClass('select_area--active')
+    location.reload()
   jqXHR.fail (xhr, stat, err) ->
     console.log { fail: stat, error: err, xhr: xhr }
     

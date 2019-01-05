@@ -30,38 +30,42 @@ class Stage < ApplicationRecord
         .order(:startdate)
     end
   
-    def count_on_week(firstday_of_week)
+    def count_on_week(area, firstday_of_week)
       Stage
         .where("startdate >= ?", firstday_of_week)
         .where("startdate <= ?", firstday_of_week + 6)
+        .where(area: area)
         .size
     end
   
-    def playing(page=1)
+    def playing(area, page=1)
       Stage
         .where("startdate <= ?", Date.today)
+        .where(area: area)
         .order(:startdate, :id)
         .page(page)
     end
     
-    def thisweek(page=1)
+    def thisweek(area, page=1)
       first = firstofweek(Date.today)
       last  = lastofweek(Date.today)
       Stage
         .where("startdate >= ?", first)
         .where("startdate <= ?", last)
+        .where(area: area)
         .order(:startdate, :id)
         .page(page)
     end
     
-    def later(page, start)
+    def later(area, page, start)
       start = DateTime.strptime(start, "%Y%m%d")
       Stage
         .where("startdate >= ?", start)
         .where("startdate <= ?", start + 6)
+        .where(area: area)
         .order(:startdate, :id)
         .page(page)
     end
-    
+
   end
 end

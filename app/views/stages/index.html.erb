@@ -1,6 +1,5 @@
 
-<%= # render 'shared/header_signup'
-%>
+<%= render 'shared/header_signup' %>
 
 <%= render 'counter' %>
 
@@ -20,41 +19,32 @@
     class: 'stagenavi-playing' + stagenavi_onoff('playing') %> 
 <%= link_to "今週〜", stages_thisweek_path,
     class: 'stagenavi-thisweek' + stagenavi_onoff('thisweek') %>
-<%= link_to '#', #stages_later_path,
+<%= link_to '#',
     class: 'stagenavi-later' + stagenavi_onoff('later') do %>
     来週以降〜&nbsp;<span class="glyphicon glyphicon-chevron-down" style="font-size: 0.8em"></span>
 <% end %>
 
 <ul class="later-list" id="later-list-1">
 <% latermax = 5 %>
-<% count = 0    %>
-<% @stages_on_weeks.each do |stage_on_week| %>
-    <li>
-        <%= link_to stage_on_week[:firstday].strftime('%Y-%m-%d') + "〜" + 
-            (stage_on_week[:firstday] + 6).strftime('%Y-%m-%d') + " (" + stage_on_week[:size].to_s + "件)",
-            "/stages/later?start=" + stage_on_week[:firstday].strftime('%Y%m%d') %>
-        <% count+=1 %>
-        <% break if count > latermax %>
-    </li>
+<% @stages_on_weeks.each_with_index do |stage_on_week, i| %>
+    <% if i <= latermax %>
+        <li><%= link_to stage_on_week[:text], stage_on_week[:url] %></li>
+    <% end %>
 <% end %>
-<% if @stages_on_weeks.count > count %>
+<% if @stages_on_weeks.count > latermax %>
     <li><a href="" id="later-list-more">もっとみる..</a></li>
 <% end %>
 </ul>
 
 <ul class="later-list" id="later-list-2">
 <% @stages_on_weeks.each do |stage_on_week| %>
-    <li>
-        <%= link_to stage_on_week[:firstday].strftime('%Y-%m-%d') + "〜" + 
-            (stage_on_week[:firstday] + 6).strftime('%Y-%m-%d') + " (" + stage_on_week[:size].to_s + "件)",
-            "/stages/later?start=" + stage_on_week[:firstday].strftime('%Y%m%d') %>
-    </li>
+    <li><%= link_to stage_on_week[:text], stage_on_week[:url] %></li>
 <% end %>
 </ul>
 <br />
 <%= render 'stagelist_area' %>
 
 <div class="footer-navi">
-  <%= prevweek_link %>
-  <%= nextweek_link %>
+  <%= link_to @prevweek_link[:text], @prevweek_link[:url], class: "prevweek-link" unless @prevweek_link.nil? %>
+  <%= link_to @nextweek_link[:text], @nextweek_link[:url], class: "nextweek-link" unless @nextweek_link.nil? %>
 </div>
