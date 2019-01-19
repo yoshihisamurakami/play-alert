@@ -1,5 +1,4 @@
 class AreaController < ApplicationController
-
   def create
     @data = { area: params[:area] }
     session[:area] = get_area_from_params
