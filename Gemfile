@@ -51,6 +51,7 @@ gem "ffi", ">= 1.9.24"
 gem "rubyzip", ">= 1.2.2"
 gem "rack", ">= 2.0.6"
 gem "activejob", ">= 5.1.6.1"
+gem "actionview", ">= 5.1.6.2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
