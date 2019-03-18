@@ -11,13 +11,16 @@ class KeepaliveJobTest < ActiveJob::TestCase
     assert_not need_keepalive?(7, 0)
     assert_not need_keepalive?(7, 30)
     
-    assert need_keepalive?(8, 0)
-    assert need_keepalive?(8, 30)
-    assert_not need_keepalive?(8, 40)
+    assert need_keepalive?(13, 0)
+    assert need_keepalive?(13, 30)
+    assert_not need_keepalive?(13, 40)
     
-    assert need_keepalive?(23, 0)
-    assert need_keepalive?(23, 35)
-    assert_not need_keepalive?(23, 40)
+    assert need_keepalive?(21, 0)
+    assert need_keepalive?(21, 35)
+    assert_not need_keepalive?(21, 40)
+    
+    assert_not need_keepalive?(22, 0)
+    assert_not need_keepalive?(22, 30)
   end
   
 end
