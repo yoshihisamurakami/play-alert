@@ -11,7 +11,7 @@ gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', ">= 3.12.3"
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails'
@@ -45,15 +45,16 @@ gem 'momentjs-rails'
 gem 'rails-controller-testing'
 gem 'open_uri_redirections'
 
-gem "loofah", ">= 2.2.3"
-gem "nokogiri", ">= 1.8.5"
+gem "loofah", ">= 2.3.1"
+gem "nokogiri", ">= 1.10.8"
 gem "rails-html-sanitizer", ">= 1.0.4"
 gem "sprockets", ">= 3.7.2"
 gem "ffi", ">= 1.9.24"
 gem "rubyzip", ">= 1.2.2"
-gem "rack", ">= 2.0.6"
+gem "rack", ">= 2.0.8"
 gem "activejob", ">= 5.1.6.1"
 gem "actionview", ">= 5.1.6.2"
+gem "rake", ">= 12.3.3"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
