@@ -8,7 +8,7 @@ end
 ruby '2.5.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -54,7 +54,7 @@ gem "ffi", ">= 1.9.24"
 gem "rubyzip", ">= 1.2.2"
 gem "rack", ">= 2.0.8"
 gem "activejob", ">= 5.1.6.1"
-gem "actionview", ">= 5.1.6.2"
+gem "actionview"
 gem "rake", ">= 12.3.3"
 
 group :development, :test do
